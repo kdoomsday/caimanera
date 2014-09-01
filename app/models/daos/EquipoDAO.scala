@@ -1,5 +1,7 @@
 package models.daos
 
+import java.util.UUID
+
 import models.{User, Equipo}
 
 import scala.concurrent.Future
@@ -13,10 +15,10 @@ import scala.concurrent.Future
 trait EquipoDAO {
 
   /** Obtener un equipo dado su id. */
-  def find(id: String): Future[Option[Equipo]]
+  def find(id: UUID): Future[Option[Equipo]]
 
   /** Obtener todos los equipos que tienen un nombre en particular. */
-  def find(nombre: String): Future[Seq[Equipo]]
+  def findByNombre(nombre: String): Future[Seq[Equipo]]
 
   /** Guardar el equipo. */
   def save(equipo: Equipo): Future[Equipo]
