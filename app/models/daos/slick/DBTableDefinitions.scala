@@ -104,12 +104,13 @@ object DBTableDefinitions {
     def * = (nombre, id) <> (DBEquipo.tupled, DBEquipo.unapply)
   }
 
-  case class DBManagerEquipo(idequipo: String, iduser: String)
-  class Managers(tag: Tag) extends Table[DBManagerEquipo](tag, "Managers") {
+
+  class JugadorEquipo(tag: Tag) extends Table[(String, String, Boolean)](tag, "JugadorEquipo") {
     def idequipo = column[String]("idequipo", O.NotNull)
     def iduser = column[String]("iduser", O.NotNull)
+    def esManager = column[Boolean]("esManager", O.NotNull, O.Default(false))
     def pk = primaryKey("pk_managers", (idequipo, iduser))
-    def * = (idequipo, iduser) <> (DBManagerEquipo.tupled, DBManagerEquipo.unapply)
+    def * = (idequipo, iduser, esManager)
   }
 
   val slickUsers = TableQuery[Users]
@@ -119,4 +120,5 @@ object DBTableDefinitions {
   val slickOAuth1Infos = TableQuery[OAuth1Infos]
   val slickOAuth2Infos = TableQuery[OAuth2Infos]
   val slickEquipos = TableQuery[Equipos]
+  val slickJugadorEquipo = TableQuery[JugadorEquipo]
 }
