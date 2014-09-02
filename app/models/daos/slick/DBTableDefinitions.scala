@@ -109,7 +109,7 @@ object DBTableDefinitions {
     def idequipo = column[String]("idequipo", O.NotNull)
     def iduser = column[String]("iduser", O.NotNull)
     def esManager = column[Boolean]("esManager", O.NotNull, O.Default(false))
-    def pk = primaryKey("pk_managers", (idequipo, iduser))
+    def pk = primaryKey("pk_jugadorEquipo", (idequipo, iduser))
     def * = (idequipo, iduser, esManager)
   }
 
