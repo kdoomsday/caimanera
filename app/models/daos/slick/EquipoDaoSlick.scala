@@ -16,7 +16,7 @@ import scala.concurrent.Future
  * Date: 8/31/14
  * Time: 1:30 PM
  */
-class EquipoDaoSlick(val userDao: UserDAO) extends EquipoDAO {
+class EquipoDaoSlick(val userDao: UserDAO)(implicit session: Session) extends EquipoDAO {
   import play.api.Play.current
 
   /** Obtener un equipo dado su id. */

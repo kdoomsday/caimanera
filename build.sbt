@@ -4,6 +4,8 @@ name := """caimanera"""
 
 version := "1.0"
 
+scalaVersion := "2.11.6"
+
 libraryDependencies ++= Seq(
   "com.mohiva" %% "play-silhouette" % "1.0",
   "org.webjars" %% "webjars-play" % "2.3.0",
@@ -16,3 +18,6 @@ libraryDependencies ++= Seq(
 )
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
+
+
+fork in run := true
