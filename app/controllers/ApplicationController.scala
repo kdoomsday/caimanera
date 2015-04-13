@@ -62,6 +62,6 @@ class ApplicationController @Inject() (implicit val env: Environment[User, Cache
    * Accion de registrar un equipo.
    */
   def registrarEquipo = SecuredAction.async { implicit request =>
-    Future.successful(Ok(views.html.registrarEquipo(request.identity)))
+    Future.successful(Ok(views.html.registrarEquipo(request.identity, forms.EquipoForm.form)))
   }
 }

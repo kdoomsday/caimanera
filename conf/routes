@@ -12,6 +12,7 @@ POST        /authenticate/credentials        @controllers.CredentialsAuthControl
 POST        /signUp                          @controllers.SignUpController.signUp
 
 GET         /registrarEquipo                 @controllers.ApplicationController.registrarEquipo
+POST        /registrarEquipo                 @controllers.CrearEquipoController.crearEquipo
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                    controllers.Assets.at(path="/public", file)

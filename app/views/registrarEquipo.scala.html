@@ -1,7 +1,21 @@
-@(user: models.User)
+@(user: models.User, registrarEquipoForm: Form[forms.EquipoForm.EquipoData])
+
+@import helper._
+@import bootstrap.text
 
 @main("Registro de equipo", Some(user)) {
     <div class="row">
         <h4 class="col-md-8">Registrar un equipo</h4>
     </div>
+    <fieldset>
+        <legend class="col-md-6 col-md-offset-3">Registra un equipo nuevo</legend>
+        @form(action = routes.CrearEquipoController.crearEquipo) {
+            @text(registrarEquipoForm("nombre"), "Nombre")
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-3">
+                    <button id="submit" type="submit" value="submit" class="btn btn-primary btn-block">Crear</button>
+                </div>
+            </div>
+        }
+    </fieldset>
 }
