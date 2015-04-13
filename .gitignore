@@ -1,12 +1,13 @@
 logs
 project/project
 project/target
-target
+/target
 tmp
 .history
-dist
+/dist
 /.idea
 /*.iml
+/*.eml
 /out
 /.idea_modules
 /.classpath
@@ -23,3 +24,8 @@ manifest.mf
 genfiles.properties
 build.xml
 build-impl.xml
+.sbtserver
+project/.sbtserver.lock
+/lib/
+/modules/
+test-result

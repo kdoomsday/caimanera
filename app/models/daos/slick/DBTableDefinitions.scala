@@ -103,6 +103,23 @@ object DBTableDefinitions {
     def nombre = column[String]("nombre", O.NotNull)
     def * = (nombre, id) <> (DBEquipo.tupled, DBEquipo.unapply)
   }
+  
+  
+  case class DBPartido(id: String, idCasa: String, idVisitante: String, golCasa: Int, golVisitante: Int)
+  class Partidos(tag: Tag) extends Table[DBPartido](tag, "Partidos") {
+      def id = column[String]("id", O.PrimaryKey)
+      def idCasa = column[String]("idCasa")
+      def idVisitante = column[String]("idVistante")
+      
+      def golCasa = column[Int]("golesCasa", O.Default(0))
+      def golVisitante = column[Int]("golesVisitante", O.Default(0))
+      
+      def * = (id, idCasa, idVisitante, golCasa, golVisitante) <> (DBPartido.tupled, DBPartido.unapply)
+      
+      
+      def casa = foreignKey("FK_ID_CASA", idCasa, slickEquipos)(_.id)
+      def visitante = foreignKey("FK_ID_VISITANTE", idVisitante, slickEquipos)(_.id)
+  }
 
 
   class JugadorEquipo(tag: Tag) extends Table[(String, String, Boolean)](tag, "JugadorEquipo") {
@@ -121,4 +138,5 @@ object DBTableDefinitions {
   val slickOAuth2Infos = TableQuery[OAuth2Infos]
   val slickEquipos = TableQuery[Equipos]
   val slickJugadorEquipo = TableQuery[JugadorEquipo]
+  val slickPartidos = TableQuery[Partidos]
 }

@@ -57,4 +57,11 @@ class ApplicationController @Inject() (implicit val env: Environment[User, Cache
     env.eventBus.publish(LogoutEvent(request.identity, request, request2lang))
     Future.successful(env.authenticatorService.discard(Redirect(routes.ApplicationController.index)))
   }
+  
+  /**
+   * Accion de registrar un equipo.
+   */
+  def registrarEquipo = SecuredAction.async { implicit request =>
+    Future.successful(Ok(views.html.registrarEquipo(request.identity)))
+  }
 }
