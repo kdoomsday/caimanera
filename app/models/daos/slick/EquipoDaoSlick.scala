@@ -1,6 +1,7 @@
 package models.daos.slick
 
 import java.util.UUID
+import javax.inject.Inject
 
 import com.mohiva.play.silhouette.core.LoginInfo
 import models.daos.{UserDAO, EquipoDAO}
@@ -16,7 +17,7 @@ import scala.concurrent.Future
  * Date: 8/31/14
  * Time: 1:30 PM
  */
-class EquipoDaoSlick(val userDao: UserDAO)(implicit session: Session) extends EquipoDAO {
+class EquipoDaoSlick @Inject() (val userDao: UserDAO) extends EquipoDAO {
   import play.api.Play.current
 
   /** Obtener un equipo dado su id. */
@@ -42,15 +43,20 @@ class EquipoDaoSlick(val userDao: UserDAO)(implicit session: Session) extends Eq
   }
 
   /** Guardar el equipo. */
-  override def save(equipo: Equipo): Future[Equipo] = ???
+  override def save(equipo: Equipo): Future[Equipo] = DB.withSession { implicit session =>
+    slickEquipos += equipo2DBEquipo(equipo)
+    Future.successful(equipo)
+  }
 
 
   /* *** Conversiones de tipos de db a tipos del modelo *** */
 
   /** Convertir de DBEquipo a Equipo. */
   private[this] def dbEquipo2Equipo(dbe: DBEquipo): Equipo = Equipo(UUID.fromString(dbe.id), dbe.nombre)
+  
+  private[this] def equipo2DBEquipo(equipo: Equipo): DBEquipo = DBEquipo(equipo.nombre, equipo.equipoID.toString)
 
-  private[this] def dbUser2User(dbu: DBUser): User = {
+  private[this] def dbUser2User(dbu: DBUser)(implicit session: Session): User = {
     slickUserLoginInfos.filter(_.userID === dbu.userID).firstOption match {
       case Some(info) =>
         slickLoginInfos.filter(_.id === info.loginInfoId).firstOption match {

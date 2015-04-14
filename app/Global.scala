@@ -21,7 +21,8 @@ object Global extends GlobalSettings with SecuredSettings with Logger {
   override def onStart(app: play.api.Application) = {
     super.onStart(app)
     // Now the configuration is read and we can create our Injector.
-    injector = Guice.createInjector(new SilhouetteModule())
+    injector = Guice.createInjector(new SilhouetteModule()).
+                    createChildInjector(new configurator.ServicesModule())
   }
 
   /**
