@@ -21,7 +21,7 @@ trait EquipoDAO {
   def findByNombre(nombre: String): Future[Seq[Equipo]]
 
   /** Guardar el equipo. */
-  def save(equipo: Equipo): Future[Equipo]
+  def save(equipo: Equipo, manager: User): Future[Equipo]
 
   /** Obtener los jugadores de un equipo. */
   def jugadores(equipo: Equipo): Future[Seq[User]]

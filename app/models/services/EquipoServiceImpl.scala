@@ -3,7 +3,7 @@ package models.services
 import scala.concurrent.Future
 import javax.inject.Inject
 
-import models.Equipo
+import models.{User, Equipo}
 import models.daos.EquipoDAO
 
 /**
@@ -11,6 +11,8 @@ import models.daos.EquipoDAO
  */
 class EquipoServiceImpl @Inject() (dao: EquipoDAO) extends EquipoService {
     
-    override def save(equipo: Equipo): Future[Equipo] =
-        dao.save(equipo)
+    override def save(equipo: Equipo, manager: User): Future[Equipo] = {
+        println(s"Guardando equipo ${equipo.nombre} de ${manager.fullName}")
+        dao.save(equipo, manager)
+    }
 }

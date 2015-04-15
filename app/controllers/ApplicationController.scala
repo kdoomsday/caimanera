@@ -7,12 +7,16 @@ import scala.concurrent.Future
 import javax.inject.Inject
 import forms._
 
+import scala.concurrent.ExecutionContext.Implicits.global
+
 /**
  * The basic application controller.
  *
  * @param env The Silhouette environment.
  */
-class ApplicationController @Inject() (implicit val env: Environment[User, CachedCookieAuthenticator])
+class ApplicationController @Inject() (
+    val userDao: models.daos.UserDAO,
+    implicit val env: Environment[User, CachedCookieAuthenticator])
   extends Silhouette[User, CachedCookieAuthenticator] {
 
   /**
@@ -21,7 +25,10 @@ class ApplicationController @Inject() (implicit val env: Environment[User, Cache
    * @return The result to display.
    */
   def index = SecuredAction.async { implicit request =>
-    Future.successful(Ok(views.html.index(request.identity)))
+    val user = request.identity
+    val equipos = userDao.equipos(user)
+    for (es <- equipos) yield
+        Ok(views.html.index(user, es))
   }
 
   /**

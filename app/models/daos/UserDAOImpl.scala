@@ -1,6 +1,6 @@
 package models.daos
 
-import models.User
+import models.{User, Equipo}
 import com.mohiva.play.silhouette.core.LoginInfo
 import scala.concurrent.Future
 import scala.collection.mutable
@@ -40,6 +40,9 @@ class UserDAOImpl extends UserDAO {
     users += (user.userID -> user)
     Future.successful(user)
   }
+  
+  
+  def equipos(user: User) = Future.successful(Seq[Equipo]())
 }
 
 /**

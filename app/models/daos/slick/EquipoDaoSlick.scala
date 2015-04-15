@@ -43,8 +43,9 @@ class EquipoDaoSlick @Inject() (val userDao: UserDAO) extends EquipoDAO {
   }
 
   /** Guardar el equipo. */
-  override def save(equipo: Equipo): Future[Equipo] = DB.withSession { implicit session =>
+  override def save(equipo: Equipo, manager: User): Future[Equipo] = DB.withSession { implicit session =>
     slickEquipos += equipo2DBEquipo(equipo)
+    slickJugadorEquipo += (equipo.equipoID.toString, manager.userID.toString, true)
     Future.successful(equipo)
   }
 

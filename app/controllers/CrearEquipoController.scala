@@ -29,8 +29,8 @@ class CrearEquipoController @Inject() (
             form => Future.successful(BadRequest(views.html.registrarEquipo(request.identity, form))),
             data => {
                 val e = Equipo(UUID.randomUUID(), data.nombre)
-                equipoService.save(e)
-                Future.successful(Ok(views.html.index(request.identity)))
+                equipoService.save(e, request.identity)
+                Future.successful(Redirect(routes.ApplicationController.index))
             }
         )
     }

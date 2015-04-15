@@ -1,4 +1,4 @@
-@(user: models.User)
+@(user: models.User, equipos: Seq[models.Equipo])
 
 @main("Silhouette - Home", Some(user)) {
     <div class="user col-md-6 col-md-offset-3">
@@ -26,6 +26,15 @@
                 </div>
             </div>
         </div>
+         <div class="row data">
+            <div class="col-md-12">
+                @for(e <- equipos) {
+                    <div class="row">
+                        <p class="col-md-6"><strong>Nombre</strong></p><p class="col-md-6">@e.nombre</p>
+                    </div>
+                }
+            </div>
+         </div>
         <div class="row">
             <hr class="col-md-12" />
             <p class="col-md-8">Presione <a href="@routes.ApplicationController.registrarEquipo">aqu&iacute;</a> para registrar un equipo</p>

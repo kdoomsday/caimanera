@@ -1,6 +1,6 @@
 package models.daos
 
-import models.User
+import models.{User, Equipo}
 import com.mohiva.play.silhouette.core.LoginInfo
 import scala.concurrent.Future
 import java.util.UUID
@@ -33,4 +33,10 @@ trait UserDAO {
    * @return The saved user.
    */
   def save(user: User): Future[User]
+  
+  
+  /**
+   * Todos los equipos de un jugador
+   */
+  def equipos(user: User): Future[Seq[Equipo]]
 }

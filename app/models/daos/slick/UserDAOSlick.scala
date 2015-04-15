@@ -1,6 +1,6 @@
 package models.daos.slick
 
-import models.User
+import models.{User, Equipo}
 import play.api.db.slick._
 import play.api.db.slick.Config.driver.simple._
 import models.daos.slick.DBTableDefinitions._
@@ -104,5 +104,15 @@ class UserDAOSlick extends UserDAO {
         user // We do not change the user => return it
       }
     }
+  }
+  
+  
+  def equipos(user: User): Future[Seq[Equipo]] = DB.withSession { implicit session =>
+    val q = for {
+                je <- slickJugadorEquipo if je.iduser === user.userID.toString
+                e <- slickEquipos if e.id === je.idequipo
+            } yield e
+            
+    Future.successful(q.list.map { case DBEquipo(nombre, id) => Equipo(UUID.fromString(id), nombre) })
   }
 }
