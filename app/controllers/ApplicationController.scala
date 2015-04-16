@@ -27,6 +27,7 @@ class ApplicationController @Inject() (
   def index = SecuredAction.async { implicit request =>
     val user = request.identity
     val equipos = userDao.equipos(user)
+    
     for (es <- equipos) yield
         Ok(views.html.index(user, es))
   }

@@ -11,8 +11,5 @@ import models.daos.EquipoDAO
  */
 class EquipoServiceImpl @Inject() (dao: EquipoDAO) extends EquipoService {
     
-    override def save(equipo: Equipo, manager: User): Future[Equipo] = {
-        println(s"Guardando equipo ${equipo.nombre} de ${manager.fullName}")
-        dao.save(equipo, manager)
-    }
+    override def save(equipo: Equipo, manager: User): Future[Equipo] = dao.save(equipo, manager)
 }

@@ -108,6 +108,7 @@ class UserDAOSlick extends UserDAO {
   
   
   def equipos(user: User): Future[Seq[Equipo]] = DB.withSession { implicit session =>
+  
     val q = for {
                 je <- slickJugadorEquipo if je.iduser === user.userID.toString
                 e <- slickEquipos if e.id === je.idequipo

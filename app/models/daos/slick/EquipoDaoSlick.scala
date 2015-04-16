@@ -46,6 +46,9 @@ class EquipoDaoSlick @Inject() (val userDao: UserDAO) extends EquipoDAO {
   override def save(equipo: Equipo, manager: User): Future[Equipo] = DB.withSession { implicit session =>
     slickEquipos += equipo2DBEquipo(equipo)
     slickJugadorEquipo += (equipo.equipoID.toString, manager.userID.toString, true)
+    
+    printf("Equipos: %d - JugadorEquipos: %d%n", slickEquipos.length.run, slickJugadorEquipo.length.run)
+    
     Future.successful(equipo)
   }
 
@@ -55,6 +58,7 @@ class EquipoDaoSlick @Inject() (val userDao: UserDAO) extends EquipoDAO {
   /** Convertir de DBEquipo a Equipo. */
   private[this] def dbEquipo2Equipo(dbe: DBEquipo): Equipo = Equipo(UUID.fromString(dbe.id), dbe.nombre)
   
+  /** Convertir de Equipo a DBEquipo. */
   private[this] def equipo2DBEquipo(equipo: Equipo): DBEquipo = DBEquipo(equipo.nombre, equipo.equipoID.toString)
 
   private[this] def dbUser2User(dbu: DBUser)(implicit session: Session): User = {
