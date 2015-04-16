@@ -17,6 +17,7 @@ import com.mohiva.play.silhouette.contrib.daos.DelegableAuthInfoDAO
 import models.services.{UserService, UserServiceImpl}
 import models.daos._
 import models.daos.slick._
+import models.services.{EquipoService, EquipoServiceImpl}
 import models.User
 
 /**
@@ -33,6 +34,7 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
     if (useSlick) {
       Logger.debug("Binding to Slick DAO implementations.")
       bind[UserDAO].to[UserDAOSlick]
+      bind[EquipoDAO].to[EquipoDaoSlick]
       bind[DelegableAuthInfoDAO[PasswordInfo]].to[PasswordInfoDAOSlick]
       bind[DelegableAuthInfoDAO[OAuth1Info]].to[OAuth1InfoDAOSlick]
       bind[DelegableAuthInfoDAO[OAuth2Info]].to[OAuth2InfoDAOSlick]
@@ -48,6 +50,8 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
     bind[IDGenerator].toInstance(new SecureRandomIDGenerator())
     bind[PasswordHasher].toInstance(new BCryptPasswordHasher)
     bind[EventBus].toInstance(EventBus())
+    
+    bind[EquipoService].to[EquipoServiceImpl]
   }
 
   /**
