@@ -8,6 +8,8 @@ import scala.concurrent.Future
 import javax.inject.Inject
 import java.util.UUID
 
+import com.github.nscala_time.time.Imports._
+
 import forms.EquipoForm
 import models.{User, Equipo}
 import models.services.EquipoService
@@ -28,7 +30,7 @@ class CrearEquipoController @Inject() (
         EquipoForm.form.bindFromRequest.fold(
             form => Future.successful(BadRequest(views.html.registrarEquipo(request.identity, form))),
             data => {
-                val e = Equipo(UUID.randomUUID(), data.nombre)
+                val e = Equipo(UUID.randomUUID(), data.nombre, DateTime.now)
                 equipoService.save(e, request.identity)
                 Future.successful(Redirect(routes.ApplicationController.index))
             }

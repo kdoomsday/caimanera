@@ -1,6 +1,7 @@
 package models
 
 import java.util.UUID
+import org.joda.time.DateTime
 
 /**
  * User: Eduardo Barrientos
@@ -9,5 +10,6 @@ import java.util.UUID
  */
 case class Equipo (
   equipoID: UUID,
-  nombre: String
+  nombre: String,
+  fechaCreacion: DateTime
 )

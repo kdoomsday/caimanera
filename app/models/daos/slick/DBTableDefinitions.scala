@@ -2,6 +2,8 @@ package models.daos.slick
 
 import play.api.db.slick.Config.driver.simple._
 
+import java.sql.Timestamp
+
 object DBTableDefinitions {
 
   case class DBUser (
@@ -97,11 +99,12 @@ object DBTableDefinitions {
   }
 
 
-  case class DBEquipo(nombre: String, id: String)
+  case class DBEquipo(nombre: String, id: String, fechaCreacion: Timestamp)
   class Equipos(tag: Tag) extends Table[DBEquipo](tag, "Equipos") {
     def id = column[String]("id", O.PrimaryKey)
     def nombre = column[String]("nombre", O.NotNull)
-    def * = (nombre, id) <> (DBEquipo.tupled, DBEquipo.unapply)
+    def fechaCreacion = column[Timestamp]("fechaCreacion", O.NotNull)
+    def * = (nombre, id, fechaCreacion) <> (DBEquipo.tupled, DBEquipo.unapply)
   }
   
   

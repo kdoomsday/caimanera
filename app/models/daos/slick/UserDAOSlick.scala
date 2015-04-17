@@ -9,6 +9,7 @@ import scala.concurrent.Future
 import java.util.UUID
 import play.Logger
 import models.daos.UserDAO
+import org.joda.time.DateTime
 
 /**
  * Give access to the user object using Slick
@@ -114,6 +115,6 @@ class UserDAOSlick extends UserDAO {
                 e <- slickEquipos if e.id === je.idequipo
             } yield e
             
-    Future.successful(q.list.map { case DBEquipo(nombre, id) => Equipo(UUID.fromString(id), nombre) })
+    Future.successful(q.list.map { case DBEquipo(nombre, id, fechaCreacion) => Equipo(UUID.fromString(id), nombre, new DateTime(fechaCreacion)) })
   }
 }

@@ -10,6 +10,9 @@ import play.api.db.slick._
 import play.api.db.slick.Config.driver.simple._
 import models.daos.slick.DBTableDefinitions._
 
+import org.joda.time.DateTime
+import java.sql.Timestamp
+
 import scala.concurrent.Future
 
 /**
@@ -56,10 +59,10 @@ class EquipoDaoSlick @Inject() (val userDao: UserDAO) extends EquipoDAO {
   /* *** Conversiones de tipos de db a tipos del modelo *** */
 
   /** Convertir de DBEquipo a Equipo. */
-  private[this] def dbEquipo2Equipo(dbe: DBEquipo): Equipo = Equipo(UUID.fromString(dbe.id), dbe.nombre)
+  private[this] def dbEquipo2Equipo(dbe: DBEquipo): Equipo = Equipo(UUID.fromString(dbe.id), dbe.nombre, new DateTime(dbe.fechaCreacion))
   
   /** Convertir de Equipo a DBEquipo. */
-  private[this] def equipo2DBEquipo(equipo: Equipo): DBEquipo = DBEquipo(equipo.nombre, equipo.equipoID.toString)
+  private[this] def equipo2DBEquipo(equipo: Equipo): DBEquipo = DBEquipo(equipo.nombre, equipo.equipoID.toString, new Timestamp(equipo.fechaCreacion.getMillis()))
 
   private[this] def dbUser2User(dbu: DBUser)(implicit session: Session): User = {
     slickUserLoginInfos.filter(_.userID === dbu.userID).firstOption match {
