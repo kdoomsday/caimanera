@@ -142,4 +142,41 @@ object DBTableDefinitions {
   val slickEquipos = TableQuery[Equipos]
   val slickJugadorEquipo = TableQuery[JugadorEquipo]
   val slickPartidos = TableQuery[Partidos]
+  
+  
+  /** Conversiones de tipos de db a tipos del modelo */
+  object Conversions {
+    import models.{User, Equipo}
+    import com.mohiva.play.silhouette.core.LoginInfo
+    import java.util.UUID
+    import org.joda.time.DateTime
+    
+    /** Convertir de DBEquipo a Equipo. */
+    def dbEquipo2Equipo(dbe: DBEquipo): Equipo = Equipo(UUID.fromString(dbe.id), dbe.nombre, new DateTime(dbe.fechaCreacion))
+  
+    /** Convertir de Equipo a DBEquipo. */
+    def equipo2DBEquipo(equipo: Equipo): DBEquipo = DBEquipo(equipo.nombre, equipo.equipoID.toString, new Timestamp(equipo.fechaCreacion.getMillis()))
+
+    
+    def dbUser2User(dbu: DBUser)(implicit session: Session): User = {
+      slickUserLoginInfos.filter(_.userID === dbu.userID).firstOption match {
+        case Some(info) =>
+          slickLoginInfos.filter(_.id === info.loginInfoId).firstOption match {
+            case Some(loginInfo) =>
+              User(
+                UUID.fromString(dbu.userID),
+                LoginInfo(loginInfo.providerID, loginInfo.providerKey),
+                dbu.firstName,
+                dbu.lastName,
+                dbu.fullName,
+                dbu.email,
+                dbu.avatarURL)
+
+            case _ => throw new Exception("User without login info")
+          }
+
+        case _ => throw new Exception("User without user login info")
+      }
+    }
+  }
 }
