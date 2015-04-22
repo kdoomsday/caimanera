@@ -13,29 +13,34 @@
         <div class="row data">
             <div class="col-md-12">
                 <div class="row">
-                    <p class="col-md-6"><strong>First name:</strong></p><p class="col-md-6">@user.firstName.getOrElse("None")</p>
+                    <p class="col-md-4"><strong>First name:</strong></p><p class="col-md-8">@user.firstName.getOrElse("None")</p>
                 </div>
                 <div class="row">
-                    <p class="col-md-6"><strong>Last name:</strong></p><p class="col-md-6">@user.lastName.getOrElse("None")</p>
+                    <p class="col-md-4"><strong>Last name:</strong></p><p class="col-md-8">@user.lastName.getOrElse("None")</p>
                 </div>
                 <div class="row">
-                    <p class="col-md-6"><strong>Full name:</strong></p><p class="col-md-6">@user.fullName.getOrElse("None")</p>
+                    <p class="col-md-4"><strong>Full name:</strong></p><p class="col-md-8">@user.fullName.getOrElse("None")</p>
                 </div>
                 <div class="row">
-                    <p class="col-md-6"><strong>Email:</strong></p><p class="col-md-6">@user.email.getOrElse("None")</p>
+                    <p class="col-md-4"><strong>Email:</strong></p><p class="col-md-8">@user.email.getOrElse("None")</p>
                 </div>
             </div>
             <hr class="col-md-12" />
         </div>
-         <div class="row data">
-            <div class="col-md-12">
-                @for(e <- equipos) {
-                    <div class="row">
-                        <p class="col-md-6"><strong>Nombre</strong></p><p class="col-md-6">@e.nombre (@e.fechaCreacion)</p>
-                    </div>
-                }
+        <div class ="row">
+          <div class="col-md-12">
+            <h4>Equipos de los que es manager</h4>
+          </div>
+        </div>
+        <div class="row data">
+           <div class="col-md-12">
+               @for(e <- equipos) {
+                   <div class="row">
+                       <p class="col-md-4"><strong>Nombre:</strong></p><p class="col-md-8">@e.nombre (@e.fechaCreacion)</p>
+                   </div>
+               }
             </div>
-         </div>
+        </div>
         <div class="row">
             <hr class="col-md-12" />
             <p class="col-md-8">Presione <a href="@routes.ApplicationController.registrarEquipo">aqu&iacute;</a> para registrar un equipo</p>
