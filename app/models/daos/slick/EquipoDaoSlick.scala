@@ -49,8 +49,6 @@ class EquipoDaoSlick @Inject() (val userDao: UserDAO) extends EquipoDAO {
     slickEquipos += equipo2DBEquipo(equipo)
     slickJugadorEquipo += (equipo.equipoID.toString, manager.userID.toString, true)
     
-    printf("Equipos: %d - JugadorEquipos: %d%n", slickEquipos.length.run, slickJugadorEquipo.length.run)
-    
     Future.successful(equipo)
   }
 }
