@@ -4,9 +4,6 @@
 @import bootstrap.text
 
 @main("Registro de equipo", Some(user)) {
-    <div class="row">
-        <h4 class="col-md-8">Registrar un equipo</h4>
-    </div>
     <fieldset>
         <legend class="col-md-6 col-md-offset-3">Registra un equipo nuevo</legend>
         @form(action = routes.CrearEquipoController.crearEquipo) {

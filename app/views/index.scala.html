@@ -41,7 +41,7 @@
                @for(e <- equipos) {
                    <div class="row">
                        <p class="col-md-6">@e.nombre</p>
-                       <p class="col-md-6">@e.fechaCreacion</p>
+                       <p class="col-md-6">@_root_.services.date.DateHelpers.dateWithTime(e.fechaCreacion)</p>
                    </div>
                }
             </div>
