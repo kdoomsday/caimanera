@@ -1,5 +1,6 @@
 package utils.di
 
+import models.daos.memory.{PasswordInfoDAO, OAuth1InfoDAO, OAuth2InfoDAO, UserDAOImpl}
 import play.api.Play
 import play.api.Play.current
 import play.Logger

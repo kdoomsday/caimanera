@@ -1,11 +1,12 @@
-package models.daos
+package models.daos.memory
 
+import com.mohiva.play.silhouette.contrib.daos.DelegableAuthInfoDAO
 import com.mohiva.play.silhouette.core.LoginInfo
 import com.mohiva.play.silhouette.core.providers.PasswordInfo
-import com.mohiva.play.silhouette.contrib.daos.DelegableAuthInfoDAO
+import models.daos.memory.PasswordInfoDAO._
+
 import scala.collection.mutable
 import scala.concurrent.Future
-import PasswordInfoDAO._
 
 /**
  * The DAO to store the password information.

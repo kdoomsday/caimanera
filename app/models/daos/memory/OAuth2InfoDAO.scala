@@ -1,11 +1,12 @@
-package models.daos
+package models.daos.memory
 
+import com.mohiva.play.silhouette.contrib.daos.DelegableAuthInfoDAO
 import com.mohiva.play.silhouette.core.LoginInfo
 import com.mohiva.play.silhouette.core.providers.OAuth2Info
-import com.mohiva.play.silhouette.contrib.daos.DelegableAuthInfoDAO
+import models.daos.memory.OAuth2InfoDAO._
+
 import scala.collection.mutable
 import scala.concurrent.Future
-import OAuth2InfoDAO._
 
 /**
  * The DAO to store the OAuth2 information.
