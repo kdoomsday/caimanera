@@ -25,6 +25,7 @@ object DBTableDefinitions {
     def * = (id, firstName, lastName, fullName, email, avatarURL) <> (DBUser.tupled, DBUser.unapply)
   }
 
+
   case class DBLoginInfo (
     id: Option[Long],
     providerID: String,
@@ -49,6 +50,7 @@ object DBTableDefinitions {
     def * = (userID, loginInfoId) <> (DBUserLoginInfo.tupled, DBUserLoginInfo.unapply)
   }
 
+
   case class DBPasswordInfo (
     hasher: String,
     password: String,
@@ -64,6 +66,7 @@ object DBTableDefinitions {
     def * = (hasher, password, salt, loginInfoId) <> (DBPasswordInfo.tupled, DBPasswordInfo.unapply)
   }
 
+
   case class DBOAuth1Info (
     id: Option[Long],
     token: String,
@@ -78,6 +81,7 @@ object DBTableDefinitions {
     def loginInfoId = column[Long]("loginInfoId")
     def * = (id.?, token, secret, loginInfoId) <> (DBOAuth1Info.tupled, DBOAuth1Info.unapply)
   }
+
 
   case class DBOAuth2Info (
     id: Option[Long],
@@ -108,7 +112,13 @@ object DBTableDefinitions {
   }
   
   
-  case class DBPartido(id: String, idCasa: String, idVisitante: String, golCasa: Int, golVisitante: Int)
+  case class DBPartido(
+                        id: String,
+                        idCasa: String,
+                        idVisitante: String,
+                        golCasa: Int,
+                        golVisitante: Int,
+                        fecha: Timestamp)
   class Partidos(tag: Tag) extends Table[DBPartido](tag, "Partidos") {
       def id = column[String]("id", O.PrimaryKey)
       def idCasa = column[String]("idCasa")
@@ -116,8 +126,10 @@ object DBTableDefinitions {
       
       def golCasa = column[Int]("golesCasa", O.Default(0))
       def golVisitante = column[Int]("golesVisitante", O.Default(0))
+
+      def fecha = column[Timestamp]("fecha", O.NotNull)
       
-      def * = (id, idCasa, idVisitante, golCasa, golVisitante) <> (DBPartido.tupled, DBPartido.unapply)
+      def * = (id, idCasa, idVisitante, golCasa, golVisitante, fecha) <> (DBPartido.tupled, DBPartido.unapply)
       
       
       def casa = foreignKey("FK_ID_CASA", idCasa, slickEquipos)(_.id)

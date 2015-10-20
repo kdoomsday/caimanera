@@ -27,6 +27,7 @@ class EquipoDaoSlick @Inject() (val userDao: UserDAO) extends EquipoDAO {
     Future.successful(slickEquipos.filter(_.id === id.toString).firstOption.map(dbEquipo2Equipo))
   }
   
+  
   /** Obtener todos los equipos que tienen un nombre en particular. */
   override def findByNombre(nombre: String): Future[Seq[Equipo]] = DB withSession { implicit session =>
     Future.successful {
@@ -34,6 +35,7 @@ class EquipoDaoSlick @Inject() (val userDao: UserDAO) extends EquipoDAO {
     }
   }
 
+  
   /** Obtener los jugadores de un equipo. */
   override def jugadores(equipo: Equipo): Future[Seq[User]] = DB.withSession { implicit session =>
     val query = for {
@@ -44,6 +46,7 @@ class EquipoDaoSlick @Inject() (val userDao: UserDAO) extends EquipoDAO {
     Future.successful(query.list.map(dbUser2User))
   }
 
+  
   /** Guardar el equipo. */
   override def save(equipo: Equipo, manager: User): Future[Equipo] = DB.withSession { implicit session =>
     slickEquipos += equipo2DBEquipo(equipo)
