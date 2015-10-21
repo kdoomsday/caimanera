@@ -1,6 +1,7 @@
 package services.score
 
 import models.Equipo
+import scala.concurrent.Future
 
 /**
   * User: Eduardo Barrientos
@@ -8,5 +9,5 @@ import models.Equipo
   * Time: 7:43 AM
   */
 trait ScoreCalc[T] {
-  def calcular(e: Equipo): Numeric[T]
+  def calcular(e: Equipo)(implicit ev: Numeric[T]): Future[T]
 }
