@@ -1,59 +1,32 @@
-@(user: models.User, equipos: Seq[models.Equipo])
-
-@main("Caimanera", Some(user)) {
-    <div class="user col-md-6 col-md-offset-3">
-        <div class="row">
-            <hr class="col-md-12" />
-            <h4 class="col-md-8">Welcome, you are now signed in!</h4>
-            <div class="col-md-4 text-right">
-                <img src='@user.avatarURL.getOrElse(routes.Assets.at("images/silhouette.png"))' style="height:40px;" />
-            </div>
-            <hr class="col-md-12" />
-        </div>
-        <div class="row data">
-            <div class="col-md-12">
-                <div class="row">
-                    <p class="col-md-6"><strong>First name:</strong></p><p class="col-md-6">@user.firstName.getOrElse("None")</p>
-                </div>
-                <div class="row">
-                    <p class="col-md-6"><strong>Last name:</strong></p><p class="col-md-6">@user.lastName.getOrElse("None")</p>
-                </div>
-                <div class="row">
-                    <p class="col-md-6"><strong>Full name:</strong></p><p class="col-md-6">@user.fullName.getOrElse("None")</p>
-                </div>
-                <div class="row">
-                    <p class="col-md-6"><strong>Email:</strong></p><p class="col-md-6">@user.email.getOrElse("None")</p>
-                </div>
-            </div>
-            <hr class="col-md-12" />
-        </div>
-        <div class ="row">
-          <div class="col-md-12">
-            <h4>Equipos de los que es manager</h4>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6"><h5><strong>Nombre</strong></h5></div>
-          <div class="col-md-6"><h5><strong>Fecha de creaci&oacute;n</strong></h5></div>
-        </div>
-        <div class="row data">
-           <div class="col-md-12">
-               @for(e <- equipos) {
-                   <div class="row">
-                       <p class="col-md-6">@e.nombre</p>
-                       <p class="col-md-6">@_root_.services.date.DateHelpers.dateWithTime(e.fechaCreacion)</p>
-                   </div>
-               }
-            </div>
-        </div>
-        <div class="row">
-            <hr class="col-md-12" />
-            <p class="col-md-8">Presione <a href="@routes.ApplicationController.registrarEquipo">aqu&iacute;</a> para registrar un equipo</p>
-        </div>
-        
-        <div class="row">
-            <hr class="col-md-12" />
-            <p class="col-md-8">Presione <a href="@routes.ApplicationController.registrarEquipo">aqu&iacute;</a> para registrar un equipo</p>
-        </div>
+@(user: models.user.User)@layout.bootstrap("Play Silhouette Postgres Async Seed") {
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p>You're running the Postgres Async Sihouette Seed!</p>
+        <p>If you've made it this far, everything is set up and ready to go.</p>
+        <p>Your database should have seven new tables for storing profiles, feel free to explore.</p>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <ul>
+        @if(user.profiles.isEmpty) {
+          <li>You are currently signed in as guest [@user.id].</li>
+          <li><a href="@routes.RegistrationController.registrationForm">Register</a></li>
+          <li><a href="@routes.AuthenticationController.signInForm">Sign In</a></li>
+        } else {
+          <li>You're signed in as user [@user.id]@user.username.map { un =>: @{un} }</li>
+          <li>
+            Profiles:
+            @user.profiles.map { p =>
+              <div>@p.providerID: @p.providerKey</div>
+            }
+          </li>
+          <li><a href="@routes.ProfileController.profile">View Profile</a></li>
+        }
+        </ul>
+      </div>
+    </div>
+  </div>
 }

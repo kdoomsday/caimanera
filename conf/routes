@@ -1,19 +1,15 @@
-# Routes
-# This file defines all application routes (Higher priority routes first)
-# ~~~~
+GET         /                        controllers.HomeController.index
+GET         /admin-test              controllers.HomeController.adminTest
 
-# Home page
-GET         /                                @controllers.ApplicationController.index
-GET         /signIn                          @controllers.ApplicationController.signIn
-GET         /signUp                          @controllers.ApplicationController.signUp
-GET         /signOut                         @controllers.ApplicationController.signOut
-GET         /authenticate/:provider          @controllers.SocialAuthController.authenticate(provider)
-POST        /authenticate/credentials        @controllers.CredentialsAuthController.authenticate
-POST        /signUp                          @controllers.SignUpController.signUp
+# Authentication
+GET         /signup                  controllers.RegistrationController.registrationForm
+POST        /signup                  controllers.RegistrationController.register
+GET         /signin                  controllers.AuthenticationController.signInForm
+POST        /signin                  controllers.AuthenticationController.authenticateCredentials
+GET         /signin/:provider        controllers.AuthenticationController.authenticateSocial(provider)
+GET         /signout                 controllers.AuthenticationController.signOut
 
-GET         /registrarEquipo                 @controllers.ApplicationController.registrarEquipo
-POST        /registrarEquipo                 @controllers.CrearEquipoController.crearEquipo
+# Profile
+GET         /profile                 controllers.ProfileController.profile
 
-# Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                    controllers.Assets.at(path="/public", file)
-GET         /webjars/*file                   controllers.WebJarAssets.at(file)
+GET         /assets/*file            controllers.Assets.versioned(path="/public", file: Asset)
