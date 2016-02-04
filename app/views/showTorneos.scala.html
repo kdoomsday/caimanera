@@ -1,0 +1,10 @@
+@* torneos Template File *@
+@(ts: Seq[models.Torneo])
+
+@layout.bootstrap("Listado de torneos") {
+    <h1>Torneos</h1>
+    
+    @for(t <- ts) {
+        <p>@{t.nombre}</p>
+    }
+}

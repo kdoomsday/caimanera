@@ -30,3 +30,4 @@ project/.sbtserver.lock
 /modules/
 test-result
 /bin/
+.ensime*
