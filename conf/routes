@@ -17,3 +17,4 @@ GET         /assets/*file            controllers.Assets.versioned(path="/public"
 
 # Torneos
 GET         /torneos                 controllers.TorneoController.showTorneos
+GET         /torneos/crear           controllers.TorneoController.createTorneo

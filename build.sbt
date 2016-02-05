@@ -15,7 +15,8 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap" % "3.3.5",
   "com.typesafe.play" %% "play-slick" % "1.1.1",
   "com.typesafe.play" %% "play-slick-evolutions" % "1.1.1",
-  "org.postgresql" % "postgresql" % "9.3-1102-jdbc41"
+  "org.postgresql" % "postgresql" % "9.3-1102-jdbc41",
+  "ch.qos.logback" % "logback-classic" % "1.1.3"
 )
 
 routesGenerator := InjectedRoutesGenerator
