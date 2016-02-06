@@ -2,11 +2,13 @@
 @(ts: Seq[models.Torneo])
 
 @layout.bootstrap("Listado de torneos") {
-    <h1>Torneos</h1>
+    <h1 class="col-md-12">Torneos</h1>
     
-    @for(t <- ts) {
-        <p>@{t.nombre}</p>
-    }
+    <div class="row">
+	    @for(t <- ts) {
+	        <p>@{t.nombre}</p>
+	    }
+    </div>
     
     <a href="@routes.TorneoController.createTorneo" class="btn btn-primary col-md-2 col-md-offset-5">+</a>
 }

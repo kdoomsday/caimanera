@@ -24,7 +24,7 @@ class TorneoController @javax.inject.Inject() (
 
   implicit val execContext = env.executionContext
 
-  def showTorneos = withSession { implicit request ⇒
+  def showTorneos = withAuthenticatedSession { implicit request ⇒
     torneoDao.first(10).map { s => Ok(views.html.torneo.showTorneos(s)) }
   }
   
@@ -36,7 +36,7 @@ class TorneoController @javax.inject.Inject() (
     )(Torneo.apply)(Torneo.unapply)
   )
   
-  def createTorneo = withSession { implicit request ⇒
+  def createTorneo = withAuthenticatedSession { implicit request ⇒
     Future.successful(Ok(views.html.torneo.crearTorneo(torneo)))
   }
 }
