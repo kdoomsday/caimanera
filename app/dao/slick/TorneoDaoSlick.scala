@@ -22,4 +22,6 @@ class TorneoDaoSlick extends TorneoDao
   override def first(n: Int): Future[Seq[Torneo]] = db.run(torneos.take(n).result)
   
   override def byUser(id: UUID): Future[Seq[Torneo]] = db.run(torneos.filter { _.idcreador === id }.result)
+  
+  override def add(t: Torneo): Future[Unit] = db.run{ DBIO.seq((torneos += t)) }
 }
