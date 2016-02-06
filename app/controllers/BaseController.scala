@@ -1,7 +1,6 @@
 package controllers
 
 import java.util.UUID
-
 import org.joda.time.LocalDateTime
 import play.api.i18n.I18nSupport
 import services.user.AuthenticationEnvironment
@@ -10,8 +9,8 @@ import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
 import models.user.{ Role, User }
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc.{ AnyContent, Result }
-
 import scala.concurrent.Future
+import play.api.i18n.Messages
 
 abstract class BaseController() extends Silhouette[User, CookieAuthenticator] with I18nSupport {
   def env: AuthenticationEnvironment
@@ -52,5 +51,17 @@ abstract class BaseController() extends Silhouette[User, CookieAuthenticator] wi
         }
     }
     response
+  }
+  
+  def withAuthenticatedSession(block: (SecuredRequest[AnyContent]) ⇒ Future[Result]) = UserAwareAction.async { implicit request =>
+    request.identity match {
+      case Some(user) if !user.isGuest ⇒
+        val secured = SecuredRequest(user, request.authenticator.getOrElse(throw new IllegalStateException()), request)
+        block(secured).map { r =>
+          r
+        }
+      
+      case _ ⇒ Future.successful(Redirect(routes.HomeController.index).flashing("error" → Messages("unauthenticated")))
+    }
   }
 }
