@@ -33,10 +33,8 @@ class TorneoController @javax.inject.Inject() (
     mapping (
     	"idtorneo" → of[Long],
       "Nombre" → nonEmptyText,
-      "idcreador" → nonEmptyText
-    )
-    ((id, nombre, idc) ⇒ {println(s"$id - $nombre - $idc"); Torneo(id, nombre, UUID.fromString(idc))})
-    ((t: Torneo) ⇒ Some(t.id, t.nombre, t.idcreador.toString()))
+      "idcreador" → of[UUID]
+    )(Torneo.apply)(Torneo.unapply)
   )
   
   def createTorneo = withAuthenticatedSession { implicit request ⇒

@@ -10,7 +10,7 @@ trait SlickDBTables {
   import driver.api._
   
   class Torneos(tag: Tag) extends Table[Torneo](tag, "torneo") {
-    def id = column[Long]("id", O.PrimaryKey)
+    def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
     def nombre = column[String]("nombre")
     def idcreador = column[UUID]("idcreador")
 
