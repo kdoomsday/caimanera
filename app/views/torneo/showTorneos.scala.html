@@ -1,5 +1,5 @@
 @* torneos Template File *@
-@(ts: Seq[models.Torneo])
+@(ts: Seq[models.Torneo])(implicit flash: Flash)
 
 @layout.bootstrap("Listado de torneos") {
     <h1 class="col-md-12">Torneos</h1>

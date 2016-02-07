@@ -1,4 +1,5 @@
-@(title: String, scripts: Seq[String] = Nil, stylesheets: Seq[String] = Nil)(content: Html)@basic(
+@(title: String, scripts: Seq[String] = Nil, stylesheets: Seq[String] = Nil)(content: Html)(implicit flash: Flash)
+@basic(
   title,
   scripts = Seq(
     routes.Assets.versioned("lib/jquery/jquery.min.js").url,

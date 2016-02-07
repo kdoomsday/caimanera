@@ -1,1 +1,3 @@
 unauthenticated = El usuario no ha sido autenticado
+crearTorneoButton = Crear
+errorCrearTorneo = Error creando el torneo

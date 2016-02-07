@@ -3,7 +3,8 @@
   scripts: Seq[String] = Nil,
   stylesheets: Seq[String] = Nil,
   bodyClass: Option[String] = None
-)(content: Html)<!DOCTYPE html>
+)(content: Html)(implicit flash: Flash)
+<!DOCTYPE html>
 <html>
   <head>
     <title>@title</title>
@@ -17,6 +18,7 @@
   </head>
   <body@bodyClass.map(c => Html(" class=\"" + c + "\""))>
     @util.navbar()
+    @util.flashNotify()
     @content
   </body>
 </html>

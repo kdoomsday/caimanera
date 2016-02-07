@@ -37,14 +37,15 @@ class TorneoController @javax.inject.Inject() (
   )
   
   def createTorneo = withAuthenticatedSession { implicit request ⇒
-    Future.successful(Ok(views.html.torneo.crearTorneo(torneo)))
+    Future.successful(Ok(views.html.torneo.crearTorneo(torneo, request.identity)))
   }
   
   
   def torneoAdd = withAuthenticatedSession { implicit request ⇒ 
     torneo.bindFromRequest().fold(
       hasErrors ⇒
-        Future.successful(BadRequest(views.html.torneo.crearTorneo(hasErrors))),
+        Future.successful(
+            BadRequest(views.html.torneo.crearTorneo(hasErrors, request.identity))),
         
       data ⇒
         torneoDao.add(data).map { _ => Redirect(routes.TorneoController.showTorneos()) }
