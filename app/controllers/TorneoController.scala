@@ -26,7 +26,7 @@ class TorneoController @javax.inject.Inject() (
   implicit val execContext = env.executionContext
 
   def showTorneos = withAuthenticatedSession { implicit request ⇒
-    torneoDao.first(10).map { s ⇒ Ok(views.html.torneo.showTorneos(s)) }
+    torneoDao.byUser(request.identity.id).map { s ⇒ Ok(views.html.torneo.showTorneos(s)) }
   }
   
   val torneo = Form(
