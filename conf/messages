@@ -1,3 +1,6 @@
 unauthenticated = El usuario no ha sido autenticado
 crearTorneoButton = Crear
 errorCrearTorneo = Error creando el torneo
+
+torneoEliminado = El torneo fue eliminado exitosamente
+torneoEliminadoWrong = El numero de torneos eliminado no fue 1

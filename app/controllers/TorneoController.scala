@@ -52,4 +52,11 @@ class TorneoController @javax.inject.Inject() (
         torneoDao.add(data).map { _ => Redirect(routes.TorneoController.showTorneos()) }
     )
   }
+  
+  def torneoRemove(id: Long) = withAuthenticatedSession { implicit request ⇒
+    torneoDao.eliminar(id).map { amnt ⇒ amnt match {
+      case 1 ⇒ Redirect(routes.TorneoController.showTorneos()).flashing("info" → messagesApi("torneoEliminado"))
+      case _ ⇒ Redirect(routes.TorneoController.showTorneos()).flashing("error" → messagesApi("torneoEliminadoWrong"))
+    }}
+  }
 }
