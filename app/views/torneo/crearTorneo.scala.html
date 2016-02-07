@@ -1,6 +1,12 @@
 @* crearTorneo Template File *@
-@(torneoForm: Form[Torneo])
+@(torneoForm: Form[Torneo])(implicit messages: Messages)
 
 @layout.bootstrap("Crear torneo") {
-  <h1>Placeholder de forma de creacion de torneo</h1>
+  <h1>Datos del torneo</h1>
+  
+  <div class="jumbotron col-md-10 col-md-offset-1">
+	  @helper.form(action = routes.TorneoController.torneoAdd) {
+	    @helper.inputText(torneoForm("Nombre"))
+	  }
+  </div>
 }
