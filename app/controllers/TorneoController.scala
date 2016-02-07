@@ -13,6 +13,7 @@ import play.api.data.format.Formats._
 import models.Torneo
 import java.util.UUID
 import scala.concurrent.Future
+import models.Torneo
 
 @javax.inject.Singleton
 class TorneoController @javax.inject.Inject() (
@@ -32,8 +33,10 @@ class TorneoController @javax.inject.Inject() (
     mapping (
     	"idtorneo" → of[Long],
       "Nombre" → nonEmptyText,
-      "idcreador" → of[UUID]
-    )(Torneo.apply)(Torneo.unapply)
+      "idcreador" → nonEmptyText
+    )
+    ((id, nombre, idc) ⇒ {println(s"$id - $nombre - $idc"); Torneo(id, nombre, UUID.fromString(idc))})
+    ((t: Torneo) ⇒ Some(t.id, t.nombre, t.idcreador.toString()))
   )
   
   def createTorneo = withAuthenticatedSession { implicit request ⇒
