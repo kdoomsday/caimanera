@@ -1,0 +1,24 @@
+@* torneoDetails Template File *@
+@(t: Torneo, es: Seq[Equipo])(implicit flash: Flash, messages: Messages)
+
+@layout.bootstrap(messages("torneoDetails.tituloVentana")) {
+  <h1>@t.nombre</h1>
+  
+  <div class="container-fluid">
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Nombre</td>
+        </tr>
+      </thead>
+      
+      <tbody>
+        @for(e <- es) {
+          <tr>
+            <td>@e.nombre</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

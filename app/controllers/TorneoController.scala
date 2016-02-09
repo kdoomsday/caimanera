@@ -10,10 +10,9 @@ import dao.slick.TorneoDaoSlick
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
-import models.Torneo
+import models.{ Torneo, Equipo }
 import java.util.UUID
 import scala.concurrent.Future
-import models.Torneo
 
 object TorneoController {
   case class TorneoDef(id: Long, nombre: String, idcreador: UUID, equipos: List[String])
@@ -56,10 +55,13 @@ class TorneoController @javax.inject.Inject() (
         Future.successful(
             BadRequest(views.html.torneo.crearTorneo(hasErrors, request.identity))),
         
-      data ⇒
-        torneoDao.add(data).map { _ ⇒
+      data ⇒ {
+        val (t, es) = (Torneo(data.id, data.nombre, data.idcreador), data.equipos)
+        val equipos = es.map(nom ⇒ Equipo(-1L, nom, t.id))
+        torneoDao.add(t, equipos).map { _ ⇒
           Redirect(routes.TorneoController.showTorneos())
             .flashing("success" → messagesApi("torneoController.exitoCrearTorneo")) }
+      }
     )
   }
   
@@ -68,5 +70,12 @@ class TorneoController @javax.inject.Inject() (
       case 1 ⇒ Redirect(routes.TorneoController.showTorneos()).flashing("info" → messagesApi("torneoEliminado"))
       case _ ⇒ Redirect(routes.TorneoController.showTorneos()).flashing("error" → messagesApi("torneoEliminadoWrong"))
     }}
+  }
+  
+  def torneoDetails(id: Long) = withAuthenticatedSession { implicit request ⇒
+    torneoDao.details(id).map( oDetails ⇒ oDetails match {
+      case Some((t, es)) ⇒ Ok(views.html.torneo.torneoDetails(t, es))
+      case None ⇒ Redirect(routes.TorneoController.showTorneos()).flashing("error" → messagesApi("torneoController.noHayTorneo"))
+    })
   }
 }

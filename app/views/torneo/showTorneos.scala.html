@@ -13,7 +13,7 @@
 	        <tbody>
 				    @for(t <- ts) {
 				        <tr>
-				          <td class="col-md-10">@{t.nombre}</td>
+				          <td class="col-md-10"><a href="@routes.TorneoController.torneoDetails(t.id)">@{t.nombre}</a></td>
 				          <td class="col-md-2"><a class="btn btn-default" href="@routes.TorneoController.torneoRemove(t.id)">-</a></td>
 				        </tr>
 				    }
