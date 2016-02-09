@@ -4,6 +4,7 @@ import slick.driver.JdbcProfile
 import models.Torneo
 import java.util.UUID
 import java.sql.Timestamp
+import models.Equipo
 
 trait SlickDBTables {
   protected val driver: JdbcProfile
@@ -17,6 +18,17 @@ trait SlickDBTables {
     def * = (id, nombre, idcreador) <> (Torneo.tupled, Torneo.unapply)
     
     foreignKey("fk_idcreador", idcreador, users)(_.id, onUpdate=ForeignKeyAction.Restrict)
+  }
+  
+  
+  class Equipos(tag: Tag) extends Table[Equipo](tag, "equipo") {
+    def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+    def nombre = column[String]("nombre")
+    def idtorneo = column[Long]("idtorneo")
+    
+    def * = (id, nombre, idtorneo) <> (Equipo.tupled, Equipo.unapply)
+    
+    foreignKey("fk_torneo", idtorneo, torneos)(_.id)
   }
   
   
@@ -36,4 +48,5 @@ trait SlickDBTables {
   
   val torneos = TableQuery[Torneos]
   val users   = TableQuery[Users]
+  val equipos = TableQuery[Equipos]
 }
