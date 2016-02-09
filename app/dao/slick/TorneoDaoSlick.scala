@@ -35,17 +35,17 @@ class TorneoDaoSlick extends TorneoDao
   override def eliminar(id: Long): Future[Int] = db.run(torneos.filter{ _.id === id }.delete)
   
   
-  override def details(id: Long): Future[Option[(Torneo, Seq[Equipo])]] = db.run {
-    val first = for {
-                  (t, e) ← torneos join equipos if t.id === id
-                } yield (t, e)
-    
-    val resultAction = first.result
-    
-    resultAction.map { tes ⇒
-      tes.headOption map { case (t, e) ⇒
-        (t, tes.map{case (t2, e2) ⇒ e2 })
-      }
+  private[this] def byId(id: Long): Future[Option[Torneo]] = db.run(torneos.filter(_.id === id).result.headOption)
+  
+  private[this] def equiposDeTorneo(idtorneo: Long): Future[Seq[Equipo]] =
+    db.run(equipos.filter(_.idtorneo === idtorneo).result)
+  
+  override def details(id: Long): Future[Option[(Torneo, Seq[Equipo])]] = {
+    for {
+      ot ← byId(id)
+      es ← equiposDeTorneo(id)
+    } yield {
+      ot.map(t ⇒ (t, es))
     }
   }
 }
