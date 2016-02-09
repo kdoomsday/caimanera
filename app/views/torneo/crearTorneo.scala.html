@@ -1,5 +1,5 @@
 @* crearTorneo Template File *@
-@(torneoForm: Form[Torneo], user: models.user.User)(implicit messages: Messages, flash: Flash)
+@(torneoForm: Form[TorneoController.TorneoDef], user: models.user.User)(implicit messages: Messages, flash: Flash)
 
 @layout.bootstrap("Crear torneo", scripts=Seq(routes.Assets.versioned("javascripts/crearTorneo.js").url)) {
   <h1>Datos del torneo</h1>
@@ -19,7 +19,7 @@
 	    </div>
 	    
 	    <input type="button" class="col-md-2 col-md-offset-5 btn btn-default" value="@messages("crearTorneo.agregarEquipoButton")"
-	     onclick="appendEquipo('equipos', '@messages("crearTorneo.placeholderEquipo")')"/>
+	     onclick="equipoSpace.mkInput('equipos', '@messages("crearTorneo.placeholderEquipo")')"/>
 	  }
   </div>
 }

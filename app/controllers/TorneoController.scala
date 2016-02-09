@@ -15,12 +15,18 @@ import java.util.UUID
 import scala.concurrent.Future
 import models.Torneo
 
+object TorneoController {
+  case class TorneoDef(id: Long, nombre: String, idcreador: UUID, equipos: List[String])
+}
+
 @javax.inject.Singleton
 class TorneoController @javax.inject.Inject() (
     override val messagesApi: MessagesApi,
     override val env: AuthenticationEnvironment)
     extends BaseController
 {
+  import TorneoController.TorneoDef
+  
   private val torneoDao = new TorneoDaoSlick()
 
   implicit val execContext = env.executionContext
@@ -29,12 +35,14 @@ class TorneoController @javax.inject.Inject() (
     torneoDao.byUser(request.identity.id).map { s ⇒ Ok(views.html.torneo.showTorneos(s)) }
   }
   
+  
   val torneo = Form(
     mapping (
     	"idtorneo" → of[Long],
       "Nombre" → nonEmptyText,
-      "idcreador" → of[UUID]
-    )(Torneo.apply)(Torneo.unapply)
+      "idcreador" → of[UUID],
+      "equipo" → list(nonEmptyText)
+    )(TorneoDef.apply)(TorneoDef.unapply)
   )
   
   def createTorneo = withAuthenticatedSession { implicit request ⇒
