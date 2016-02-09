@@ -5,6 +5,7 @@ var equipoSpace = {
 			return equipoSpace.current;
 		},
 		mkInput:function(divid, placeholder) {
-			$("#"+divid).append('<input type="text" id="equipo[' + equipoSpace.next() + ']" class="col-md-11" placeholder="' + placeholder + '"/>');
+			$("#"+divid).append('<input type="text" name="equipo[' + equipoSpace.next() +
+					']" class="col-md-11" placeholder="' + placeholder + '"/>');
 		}
 }
