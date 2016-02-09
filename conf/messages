@@ -1,6 +1,9 @@
 unauthenticated = El usuario no ha sido autenticado
 
 crearTorneoButton = Crear
+crearTorneo.crearEquipoTitle = Registrar equipos que participan en el torneo
+crearTorneo.placeholderEquipo = Nombre del equipo a registrar
+crearTorneo.agregarEquipoButton = +
 errorCrearTorneo = Error creando el torneo
 
 torneoEliminado = El torneo fue eliminado exitosamente
