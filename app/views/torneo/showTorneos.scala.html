@@ -1,5 +1,5 @@
 @* torneos Template File *@
-@(ts: Seq[models.Torneo])(implicit flash: Flash)
+@(ts: Seq[models.Torneo])(implicit messages: Messages, flash: Flash)
 
 @layout.bootstrap("Listado de torneos") {
     <div class="page-header">
@@ -22,5 +22,8 @@
       </div>
     </div>
     
-    <a href="@routes.TorneoController.createTorneo" class="btn btn-primary col-md-2 col-md-offset-5">+</a>
+    <a href="@routes.TorneoController.createTorneo"
+      class="btn btn-primary col-md-2 col-md-offset-5">
+        @messages("showTorneos.nuevoTorneoButton")
+    </a>
 }

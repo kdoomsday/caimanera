@@ -49,7 +49,9 @@ class TorneoController @javax.inject.Inject() (
             BadRequest(views.html.torneo.crearTorneo(hasErrors, request.identity))),
         
       data ⇒
-        torneoDao.add(data).map { _ => Redirect(routes.TorneoController.showTorneos()) }
+        torneoDao.add(data).map { _ ⇒
+          Redirect(routes.TorneoController.showTorneos())
+            .flashing("success" → messagesApi("torneoController.exitoCrearTorneo")) }
     )
   }
   
