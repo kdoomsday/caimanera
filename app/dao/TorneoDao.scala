@@ -13,8 +13,8 @@ trait TorneoDao {
   /** Todos los torneos de un usuario */
   def byUser(id: UUID): Future[Seq[Torneo]]
   
-  /** Agregar un torneo */
-  def add(t: Torneo, es: Seq[Equipo]): Future[Unit]
+  /** Agregar un torneo. Devuelve el numero de equipos... */
+  def add(t: Torneo, es: Seq[Equipo]): Future[Option[Int]]
   
   /** Eliminar un torneo segun su id
     * @returns Filas eliminadas. Deberia ser cero (si no existe) o uno.

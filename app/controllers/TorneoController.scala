@@ -58,6 +58,9 @@ class TorneoController @javax.inject.Inject() (
       data ⇒ {
         val (t, es) = (Torneo(data.id, data.nombre, data.idcreador), data.equipos)
         val equipos = es.map(nom ⇒ Equipo(-1L, nom, t.id))
+        
+        println(equipos)
+        
         torneoDao.add(t, equipos).map { _ ⇒
           Redirect(routes.TorneoController.showTorneos())
             .flashing("success" → messagesApi("torneoController.exitoCrearTorneo")) }

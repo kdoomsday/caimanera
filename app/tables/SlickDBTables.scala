@@ -28,7 +28,7 @@ trait SlickDBTables {
     
     def * = (id, nombre, idtorneo) <> (Equipo.tupled, Equipo.unapply)
     
-    foreignKey("fk_torneo", idtorneo, torneos)(_.id)
+    foreignKey("fk_torneo", idtorneo, torneos)(_.id, onUpdate=ForeignKeyAction.Cascade, onDelete=ForeignKeyAction.Cascade)
   }
   
   

@@ -27,10 +27,14 @@ class TorneoDaoSlick extends TorneoDao
   
   override def byUser(id: UUID): Future[Seq[Torneo]] = db.run(torneos.filter { _.idcreador === id }.result)
   
-  override def add(t: Torneo, es: Seq[Equipo]): Future[Unit] = db.run { DBIO.seq(
-    torneos += t,
-    equipos ++= es
-  )}
+  override def add(t: Torneo, es: Seq[Equipo]): Future[Option[Int]] = {
+    val actionInsertTorneo = (torneos returning torneos.map(_.id)) += t
+    val endAction = actionInsertTorneo.flatMap { idt ⇒
+      equipos ++= es.map(e ⇒ e.copy(idtorneo = idt))
+    }
+    
+    db.run(endAction)
+  }
   
   override def eliminar(id: Long): Future[Int] = db.run(torneos.filter{ _.id === id }.delete)
   
