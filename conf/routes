@@ -22,3 +22,7 @@ POST        /torneos/add             controllers.TorneoController.torneoAdd
 GET         /torneos/eliminar/:id    controllers.TorneoController.torneoRemove(id: Long)
 
 GET         /torneos/detalles/:id    controllers.TorneoController.torneoDetails(id: Long)
+
+
+# Equipos
+GET         /equipos/:id             controllers.EquipoController.editarEquipoView(id: Long)

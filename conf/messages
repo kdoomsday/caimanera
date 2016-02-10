@@ -19,3 +19,6 @@ torneoController.noHayTorneo = No se pudo conseguir el torneo
 
 # Vista de detalles del torneo
 torneoDetails.tituloVentana = Detalles del torneo
+
+# Editar equipo
+editarEquipo.title = Modificar equipo
