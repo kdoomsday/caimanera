@@ -22,3 +22,4 @@ torneoDetails.tituloVentana = Detalles del torneo
 
 # Editar equipo
 editarEquipo.title = Modificar equipo
+equipoController.equipoNoExiste = El equipo especificado no existe

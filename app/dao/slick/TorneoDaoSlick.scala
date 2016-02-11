@@ -52,4 +52,18 @@ class TorneoDaoSlick extends TorneoDao
       ot.map(t ⇒ (t, es))
     }
   }
+  
+  
+  override def actualizarEquipo(idequipo: Long, nombre: String): Future[Boolean] = {
+    val f = db.run {
+      val q = equipos.filter { _.id === idequipo }.map(_.nombre)
+      q.update(nombre)
+    }
+    
+    f.map(x ⇒ x == 1)
+  }
+  
+  override def equipoById(idequipo: Long): Future[Option[Equipo]] = db.run {
+      equipos.filter(_.id === idequipo).result.headOption
+  }
 }

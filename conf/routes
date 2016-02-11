@@ -25,4 +25,4 @@ GET         /torneos/detalles/:id    controllers.TorneoController.torneoDetails(
 
 
 # Equipos
-GET         /equipos/:id             controllers.EquipoController.editarEquipoView(id: Long)
+GET         /equipos/:idtorneo/:idequipo  controllers.EquipoController.editarEquipoView(idtorneo: Long, idequipo: Long)

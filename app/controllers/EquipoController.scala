@@ -7,24 +7,35 @@ import play.api.data.Forms._
 import play.api.data.format.Formats._
 import scala.concurrent.Future
 import views.html.torneo.torneoDetails
+import dao.slick.TorneoDaoSlick
 
 class EquipoController @javax.inject.Inject() (
     override val messagesApi: MessagesApi,
     override val env: AuthenticationEnvironment)
     extends BaseController
 {
+  val dao = new TorneoDaoSlick()
+  
+  
   val equipoForm = Form(
       tuple(
+    		  "idequipo" → of[Long],
           "Nombre"   → nonEmptyText,
-          "idequipo" → of[Long],
           "idtorneo" → of[Long]
       )
   )
   
   
-  def editarEquipoView(idequipo: Long) = withAuthenticatedSession { implicit request ⇒
-    
-    Future.successful(Ok(views.html.torneo.editarEquipo(equipoForm.)))
+  def editarEquipoView(idtorneo: Long, idequipo: Long) = withAuthenticatedSession { implicit request ⇒
+    dao.equipoById(idequipo).map { oe ⇒ oe match {
+      case Some(equipo) ⇒
+        val data = (equipo.id, equipo.nombre, equipo.idtorneo)
+        Ok(views.html.torneo.editarEquipo(equipoForm.fill(data)))
+        
+      case None ⇒
+        Redirect(routes.TorneoController.torneoDetails(idtorneo).flashing("error" → messagesApi("equipoController.equipoNoExiste"))
+    }}
+    Future.successful()
   }
   
   

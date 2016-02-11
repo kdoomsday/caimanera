@@ -23,4 +23,10 @@ trait TorneoDao {
   
   /** Detalles de un torneo segun su id */
   def details(id: Long): Future[Option[(Torneo, Seq[Equipo])]]
+  
+  /** Actualizar un equipo. Devuelve si existia el equipo y fue exitosa la actualizacion */
+  def actualizarEquipo(id: Long, nombre: String): Future[Boolean]
+  
+  /** Obtener un equipo por su id */
+  def equipoById(id: Long): Future[Option[Equipo]]
 }
