@@ -44,7 +44,12 @@ class EquipoController @javax.inject.Inject() (
       hasErrors ⇒ Future.successful(BadRequest(views.html.torneo.editarEquipo(hasErrors))),
       
       data ⇒ {
-        Future.successful(Redirect(routes.TorneoController.torneoDetails(data._3)).flashing("success" → messagesApi("equipoController.equipoEditado")))
+        val (idequipo, nombre, idtorneo) = data
+        dao.actualizarEquipo(idequipo, nombre).map { res ⇒
+          val flash = if (res) ("success" → messagesApi("equipoController.equipoEditado"))
+                      else     ("error"   → messagesApi("equipoController.errorEdicionEquipo"))
+          Redirect(routes.TorneoController.torneoDetails(idtorneo)).flashing(flash)
+        }
       }
     )
   }

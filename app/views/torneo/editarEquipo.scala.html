@@ -2,5 +2,16 @@
 @(form: Form[(Long, String, Long)])(implicit flash: Flash, messages: Messages)
 
 @layout.bootstrap(messages("editarEquipo.title")) {
-  <h1>TODO</h1>
+  <h1>Editar equipo</h1>
+  
+  <div class="container-fluid">
+    <div class="jumbotron col-md-8 col-md-offset-2">
+		  @helper.form(action = routes.EquipoController.editarEquipo) {
+		    <input type="hidden" name="idequipo" value="@form("idequipo").value"/>
+		    @helper.inputText(form("Nombre"), 'placeholder -> messages("editarEquipo.placeholderNombre"))
+		    <input type="hidden" name="idtorneo" value="@form("idtorneo").value"/>
+		    <input type="submit" class="btn btn-default" value="@messages("editarEquipo.botonSubmit")"/>
+		  }
+		</div>
+	</div>
 }

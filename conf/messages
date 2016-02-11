@@ -23,5 +23,8 @@ torneoDetails.editarEquipo = Editar
 
 # Editar equipo
 editarEquipo.title = Modificar equipo
+editarEquipo.placeholderNombre = Nombre del equipo
+editarEquipo.botonSubmit = Guardar
 equipoController.equipoNoExiste = El equipo especificado no existe
 equipoController.equipoEditado = El equipo fue editado exitosamente
+equipoController.errorEdicionEquipo = Disculpe. Ha ocurrido un error editando el equipo. Por favor intente m&aacute;s tarde.
