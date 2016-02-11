@@ -10,14 +10,16 @@
     <table class="table">
       <thead>
         <tr>
-          <td><strong>Nombre</strong></td>
+          <td class="col-md-11"><strong>Nombre</strong></td>
+          <td class="col-md=1"></td>
         </tr>
       </thead>
       
       <tbody>
         @for(e <- es) {
           <tr>
-            <td>@e.nombre</td>
+            <td class="col-md-11">@e.nombre</td>
+            <td class="col-md-1"><a href="@routes.EquipoController.editarEquipoView(t.id, e.id)">@messages("torneoDetails.editarEquipo")</a></td>
           </tr>
         }
       </tbody>

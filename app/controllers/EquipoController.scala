@@ -15,6 +15,7 @@ class EquipoController @javax.inject.Inject() (
     extends BaseController
 {
   val dao = new TorneoDaoSlick()
+  implicit val execContext = env.executionContext
   
   
   val equipoForm = Form(
@@ -33,9 +34,8 @@ class EquipoController @javax.inject.Inject() (
         Ok(views.html.torneo.editarEquipo(equipoForm.fill(data)))
         
       case None ⇒
-        Redirect(routes.TorneoController.torneoDetails(idtorneo).flashing("error" → messagesApi("equipoController.equipoNoExiste"))
+        Redirect(routes.TorneoController.torneoDetails(idtorneo)).flashing("error" → messagesApi("equipoController.equipoNoExiste"))
     }}
-    Future.successful()
   }
   
   
@@ -44,7 +44,7 @@ class EquipoController @javax.inject.Inject() (
       hasErrors ⇒ Future.successful(BadRequest(views.html.torneo.editarEquipo(hasErrors))),
       
       data ⇒ {
-        Future.successful(Ok(routes.TorneoController.torneoDetails(data._3)))
+        Future.successful(Redirect(routes.TorneoController.torneoDetails(data._3)).flashing("success" → messagesApi("equipoController.equipoEditado")))
       }
     )
   }
