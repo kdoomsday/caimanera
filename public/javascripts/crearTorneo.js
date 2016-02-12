@@ -9,3 +9,8 @@ var equipoSpace = {
 					']" class="col-md-11" placeholder="' + placeholder + '"/>');
 		}
 }
+
+function popupEquipo(divid) {
+	$("#"+divid).css("diplay", "block");
+	alert('ding!')
+}
