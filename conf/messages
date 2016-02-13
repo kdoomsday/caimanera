@@ -21,6 +21,9 @@ torneoController.noHayTorneo = No se pudo conseguir el torneo
 torneoDetails.tituloVentana = Detalles del torneo
 torneoDetails.editarEquipo = Editar
 torneoDetails.agregarEquipo.header = Agregar equipo
+torneoDetails.agregarEquipo.equipoPlaceholder = Nombre del nuevo equipo
+torneoDetails.agregarEquipo.submit=Crear
+torneoDetails.agregarEquipo.cerrar=Cerrar
 
 # Editar equipo
 editarEquipo.title = Modificar equipo

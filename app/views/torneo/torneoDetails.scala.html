@@ -41,11 +41,17 @@
             </div>
             
             <div class="modal-body">
-              <p>Hello!</p>
+              <div class="row">
+	              <form action="#">
+	                <input type="text" class="col-md-10" name="nombreEquipo"
+	                  placeholder="@messages("torneoDetails.agregarEquipo.equipoPlaceholder")"></input>
+	                <input type="submit" class="col-md-2 btn btn-default btn-sm" value="@messages("torneoDetails.agregarEquipo.submit")"/>
+	              </form>
+              </div>
             </div>
             
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">@messages("torneoDetails.agregarEquipo.cerrar")</button>
             </div>
           </div>
         </div>
