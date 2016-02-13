@@ -24,11 +24,31 @@
         }
       </tbody>
       
-      <input type="button" onclick="popupEquipo('nuevosEquipos');" />
-      
-      <div id="nuevosEquipos">
-        <p>Hello!</p>
-      </div>
     </table>
+    
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevosEquipos" >
+        Agregar
+      </button>
+      
+      
+      <!-- Div para el dialogo modal -->
+      <div id="nuevosEquipos" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title">@messages("torneoDetails.agregarEquipo.header")</h4>
+            </div>
+            
+            <div class="modal-body">
+              <p>Hello!</p>
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 }
