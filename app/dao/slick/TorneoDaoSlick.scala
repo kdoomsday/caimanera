@@ -13,6 +13,7 @@ import java.util.UUID
 import models.Equipo
 import scala.concurrent.ExecutionContext
 import java.util.concurrent.Executors
+import models.Equipo
 
 class TorneoDaoSlick extends TorneoDao
   with HasDatabaseConfig[JdbcProfile]
@@ -65,5 +66,12 @@ class TorneoDaoSlick extends TorneoDao
   
   override def equipoById(idequipo: Long): Future[Option[Equipo]] = db.run {
       equipos.filter(_.id === idequipo).result.headOption
+  }
+  
+  
+  override def addEquipo(nombre: String, idtorneo: Long): Future[Boolean] = {
+    db.run {
+      equipos += Equipo(-1L, nombre, idtorneo)
+    }.map { amnt => amnt == 1 }
   }
 }

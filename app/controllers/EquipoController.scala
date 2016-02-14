@@ -9,6 +9,7 @@ import scala.concurrent.Future
 import views.html.torneo.torneoDetails
 import dao.slick.TorneoDaoSlick
 
+
 class EquipoController @javax.inject.Inject() (
     override val messagesApi: MessagesApi,
     override val env: AuthenticationEnvironment)
@@ -51,6 +52,23 @@ class EquipoController @javax.inject.Inject() (
           Redirect(routes.TorneoController.torneoDetails(idtorneo)).flashing(flash)
         }
       }
+    )
+  }
+  
+
+  
+  /** Contrato: Si todo sale bien devuelve "ok" y si no "error" en data. */
+  def addEquipo = withAuthenticatedSession { implicit request ⇒
+    equipoForm.bindFromRequest.fold(
+        hasErrors ⇒ Future.successful(BadRequest("error")),
+        
+        data ⇒ {
+          val (idequipo, nombre, idtorneo) = data
+          dao.addEquipo(nombre, idtorneo).map { res ⇒
+          	if (res) Ok("ok")
+          	else BadRequest("error insertando equipo")
+          }
+        }
     )
   }
 }

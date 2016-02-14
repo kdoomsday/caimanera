@@ -29,4 +29,7 @@ trait TorneoDao {
   
   /** Obtener un equipo por su id */
   def equipoById(id: Long): Future[Option[Equipo]]
+  
+  /** Agregar un equipo a un torneo. Devuelve si la operacion fue exitosa */
+  def addEquipo(nombre: String, idtorneo: Long): Future[Boolean]
 }

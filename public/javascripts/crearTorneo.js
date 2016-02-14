@@ -10,7 +10,22 @@ var equipoSpace = {
 		}
 }
 
-function popupEquipo(divid) {
-	$("#"+divid).css("diplay", "block");
-	alert('ding!')
+function addEquipo(route, dialogId, textNombre, idtorneo) {
+	$.ajax({
+		url: route,
+		type: "POST",
+		data: {
+			Nombre: $("#"+textNombre).val(),
+			idtorneo: idtorneo,
+			idequipo: -1
+		},
+		success: function(data, textStatus, jqXHR) {
+			$('#'+textNombre).val('');
+			$('#'+dialogId).modal('toggle');
+	        location.reload();
+	    },
+	    error: function(jqXHR, textStatus, errorThrown) {
+          window.alert(textStatus);
+        }
+	});
 }

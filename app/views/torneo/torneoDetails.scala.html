@@ -42,11 +42,13 @@
             
             <div class="modal-body">
               <div class="row">
-	              <form action="#">
-	                <input type="text" class="col-md-10" name="nombreEquipo"
-	                  placeholder="@messages("torneoDetails.agregarEquipo.equipoPlaceholder")"></input>
-	                <input type="submit" class="col-md-2 btn btn-default btn-sm" value="@messages("torneoDetails.agregarEquipo.submit")"/>
-	              </form>
+                <input type="text" class="col-md-10" name="nombreEquipo" id="nombreEquipo"
+                  placeholder="@messages("torneoDetails.agregarEquipo.equipoPlaceholder")"></input>
+                  
+                <button class="col-md-2 btn btn-default btn-sm"
+                  onclick="addEquipo('@routes.EquipoController.addEquipo', 'nuevosEquipos', 'nombreEquipo', '@t.id');">
+                  @messages("torneoDetails.agregarEquipo.submit")
+                </button>
               </div>
             </div>
             
