@@ -21,6 +21,9 @@ trait TorneoDao {
     */
   def eliminar(id: Long): Future[Int]
   
+  /** Eliminar un equipo segun su id. Devuelve si fue exitoso */
+  def eliminarEquipo(id: Long): Future[Boolean]
+  
   /** Detalles de un torneo segun su id */
   def details(id: Long): Future[Option[(Torneo, Seq[Equipo])]]
   

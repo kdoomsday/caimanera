@@ -10,7 +10,8 @@
     <table class="table">
       <thead>
         <tr>
-          <td class="col-md-11"><strong>Nombre</strong></td>
+          <td class="col-md-10"><strong>Nombre</strong></td>
+          <td class="col-md=1"></td>
           <td class="col-md=1"></td>
         </tr>
       </thead>
@@ -18,8 +19,9 @@
       <tbody>
         @for(e <- es) {
           <tr>
-            <td class="col-md-11">@e.nombre</td>
+            <td class="col-md-10">@e.nombre</td>
             <td class="col-md-1"><a href="@routes.EquipoController.editarEquipoView(t.id, e.id)">@messages("torneoDetails.editarEquipo")</a></td>
+            <td class="col-md-1 btn btn-default"><a href="@routes.EquipoController.eliminarEquipo(t.id, e.id)">@messages("torneoDetails.eliminarEquipo")</a></td>
           </tr>
         }
       </tbody>

@@ -28,3 +28,4 @@ GET         /torneos/detalles/:id    controllers.TorneoController.torneoDetails(
 GET         /equipos/:idtorneo/:idequipo  controllers.EquipoController.editarEquipoView(idtorneo: Long, idequipo: Long)
 POST        /equipos/editar               controllers.EquipoController.editarEquipo
 POST        /equipos/addEquipo            controllers.EquipoController.addEquipo
+GET         /equipos/eliminar/:idtorneo/:idequipo   controllers.EquipoController.eliminarEquipo(idtorneo: Long, idequipo: Long)

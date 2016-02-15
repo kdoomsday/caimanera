@@ -71,4 +71,12 @@ class EquipoController @javax.inject.Inject() (
         }
     )
   }
+  
+  def eliminarEquipo(idtorneo: Long, idequipo: Long) = withAuthenticatedSession { implicit request ⇒
+    dao.eliminarEquipo(idequipo).map { res ⇒
+      val flash = if (res) "success" → messagesApi("equipoController.equipoEliminado")
+                  else     "error"   → messagesApi("equipoController.errorEliminarEquipo")
+      Redirect(routes.TorneoController.torneoDetails(idtorneo)).flashing(flash)
+    }
+  }
 }

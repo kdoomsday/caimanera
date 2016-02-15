@@ -24,6 +24,7 @@ torneoDetails.agregarEquipo.header = Agregar equipo
 torneoDetails.agregarEquipo.equipoPlaceholder = Nombre del nuevo equipo
 torneoDetails.agregarEquipo.submit=Crear
 torneoDetails.agregarEquipo.cerrar=Cerrar
+torneoDetails.eliminarEquipo = Eliminar
 
 # Editar equipo
 editarEquipo.title = Modificar equipo
@@ -32,3 +33,6 @@ editarEquipo.botonSubmit = Guardar
 equipoController.equipoNoExiste = El equipo especificado no existe
 equipoController.equipoEditado = El equipo fue editado exitosamente
 equipoController.errorEdicionEquipo = Disculpe. Ha ocurrido un error editando el equipo. Por favor intente m&aacute;s tarde.
+
+equipoController.equipoEliminado = El equipo fue eliminado exitosamente
+equipoController.errorEliminarEquipo = Ha ocurrido alg&uacute;n error eliminando el equipo...
