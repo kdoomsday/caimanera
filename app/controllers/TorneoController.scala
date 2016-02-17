@@ -69,10 +69,10 @@ class TorneoController @javax.inject.Inject() (
   }
   
   def torneoRemove(id: Long) = withAuthenticatedSession { implicit request ⇒
-    torneoDao.eliminar(id).map { amnt ⇒ amnt match {
-      case 1 ⇒ Redirect(routes.TorneoController.showTorneos()).flashing("info" → messagesApi("torneoEliminado"))
-      case _ ⇒ Redirect(routes.TorneoController.showTorneos()).flashing("error" → messagesApi("torneoEliminadoWrong"))
-    }}
+    torneoDao.eliminar(id).map { res ⇒
+      if (res) Redirect(routes.TorneoController.showTorneos()).flashing("info" → messagesApi("torneoEliminado"))
+      else     Redirect(routes.TorneoController.showTorneos()).flashing("error" → messagesApi("torneoEliminadoWrong"))
+    }
   }
   
   def torneoDetails(id: Long) = withAuthenticatedSession { implicit request ⇒

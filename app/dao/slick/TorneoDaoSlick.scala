@@ -37,7 +37,7 @@ class TorneoDaoSlick extends TorneoDao
     db.run(endAction)
   }
   
-  override def eliminar(id: Long): Future[Int] = db.run(torneos.filter{ _.id === id }.delete)
+  override def eliminar(id: Long): Future[Boolean] = db.run(torneos.filter{ _.id === id }.delete.map { _ == 1 })
   
   override def eliminarEquipo(id: Long): Future[Boolean] =
     db.run(equipos.filter{ _.id === id }.delete.map { amnt => amnt == 1 })
