@@ -7,15 +7,15 @@ import play.api.data.Forms._
 import play.api.data.format.Formats._
 import scala.concurrent.Future
 import views.html.torneo.torneoDetails
-import dao.slick.TorneoDaoSlick
+import dao.TorneoDao
 
 
 class EquipoController @javax.inject.Inject() (
     override val messagesApi: MessagesApi,
-    override val env: AuthenticationEnvironment)
+    override val env: AuthenticationEnvironment,
+    val dao: TorneoDao)
     extends BaseController
 {
-  val dao = new TorneoDaoSlick()
   implicit val execContext = env.executionContext
   
   

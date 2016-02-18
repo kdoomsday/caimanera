@@ -19,7 +19,7 @@ class TorneoDaoSlick extends TorneoDao
   with HasDatabaseConfig[JdbcProfile]
   with SlickDBTables
 {
-  val dbConfig = DatabaseConfigProvider.get[JdbcProfile](Play.current)
+  lazy val dbConfig = DatabaseConfigProvider.get[JdbcProfile](Play.current)
   import driver.api._
   
   private implicit val eContext: ExecutionContext =
