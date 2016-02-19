@@ -16,6 +16,12 @@ trait TorneoDao {
   /** Agregar un torneo. Devuelve el numero de equipos... */
   def add(t: Torneo, es: Seq[Equipo]): Future[Option[Int]]
   
+  /**
+   * Modificar un torneo. Busca por id y asigna los demas valores.
+   * @return Si existia el torneo y fue exitosa la operacion.
+   */
+  def edit(idtorneo: Long, nuevoNombre: String): Future[Boolean]
+  
   /** Eliminar un torneo segun su id
     * @returns Si fue exitoso.
     */

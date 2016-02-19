@@ -13,6 +13,7 @@ import play.api.data.format.Formats._
 import models.{ Torneo, Equipo }
 import java.util.UUID
 import scala.concurrent.Future
+import models.Torneo
 
 object TorneoController {
   case class TorneoDef(id: Long, nombre: String, idcreador: UUID, equipos: List[String])
@@ -65,6 +66,45 @@ class TorneoController @javax.inject.Inject() (
           Redirect(routes.TorneoController.showTorneos())
             .flashing("success" → messagesApi("torneoController.exitoCrearTorneo")) }
       }
+    )
+  }
+  
+  
+  val torneoEditForm = Form (
+      tuple(
+          "idtorneo" → of[Long],
+          "Nombre"   → nonEmptyText
+      )
+  )
+  
+  def editarTorneo(id: Long) = withAuthenticatedSession { implicit request ⇒
+    torneoDao.details(id).map { maybeTorneo ⇒
+      maybeTorneo match {
+        case Some((t, _)) ⇒
+          val forma: Form[(Long, String)] = torneoEditForm.fill(t.id → t.nombre)
+          Ok(views.html.torneo.editarTorneo(forma))
+          
+        case None ⇒
+          Redirect(routes.TorneoController.showTorneos()).flashing("error" → messagesApi("torneoController.noHayTorneo"))
+      }
+    }
+  }
+  
+  def torneoEdit = withAuthenticatedSession { implicit request ⇒
+    torneoEditForm.bindFromRequest().fold(
+        errorData ⇒ {
+          println(errorData)
+          Future.successful(BadRequest(views.html.torneo.editarTorneo(errorData)))
+        },
+        data ⇒ {
+          val (id, nuevoNombre) = data
+          torneoDao.edit(id, nuevoNombre).map { success ⇒
+            val flash = 
+              if (success) "success" → messagesApi("torneoController.torneoEditado")
+              else         "error"   → messagesApi("torneoController.errorEditandoTorneo")
+            Redirect(routes.TorneoController.showTorneos()).flashing(flash)
+          }
+        }
     )
   }
   

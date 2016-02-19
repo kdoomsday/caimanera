@@ -7,6 +7,9 @@ var equipoSpace = {
 		mkInput:function(divid, placeholder) {
 			$("#"+divid).append('<input type="text" name="equipo[' + equipoSpace.next() +
 					']" class="col-md-11" placeholder="' + placeholder + '"/>');
+		},
+		setCurrent:function(curr) {
+			current = curr;
 		}
 }
 

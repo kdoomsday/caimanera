@@ -2,9 +2,14 @@
 @(t: Torneo, es: Seq[Equipo])(implicit flash: Flash, messages: Messages)
 
 @layout.bootstrap(messages("torneoDetails.tituloVentana"), scripts=Seq(routes.Assets.versioned("javascripts/crearTorneo.js").url)) {
-  <h1>@t.nombre</h1>
+  <div class="container">
+    <h1>
+      @t.nombre
+      <a href="@routes.TorneoController.editarTorneo(t.id)">
+        <small>@messages("torneoDetails.editarTorneo")</small>
+      </a>
+    </h1>
   
-  <div class="container-fluid">
   
     <h2 class="col-md-12">Equipos</h2>
     <table class="table">
@@ -29,9 +34,8 @@
     </table>
     
     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevosEquipos" >
-        Agregar
+        @messages("torneoDetails.agregarEquipoButton")
       </button>
-      
       
       <!-- Div para el dialogo modal -->
       <div id="nuevosEquipos" class="modal fade" role="dialog">

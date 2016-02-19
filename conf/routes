@@ -19,6 +19,10 @@ GET         /assets/*file            controllers.Assets.versioned(path="/public"
 GET         /torneos                 controllers.TorneoController.showTorneos
 GET         /torneos/crear           controllers.TorneoController.createTorneo
 POST        /torneos/add             controllers.TorneoController.torneoAdd
+
+GET         /torneos/editar/:id      controllers.TorneoController.editarTorneo(id: Long)
+POST        /torneos/editar          controllers.TorneoController.torneoEdit
+
 GET         /torneos/eliminar/:id    controllers.TorneoController.torneoRemove(id: Long)
 
 GET         /torneos/detalles/:id    controllers.TorneoController.torneoDetails(id: Long)

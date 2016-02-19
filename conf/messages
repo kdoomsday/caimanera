@@ -2,6 +2,7 @@ unauthenticated = El usuario no ha sido autenticado
 
 # Creacion de torneo
 crearTorneoButton = Crear
+editarTorneoButton = Editar
 crearTorneo.crearEquipoTitle = Registrar equipos que participan en el torneo
 crearTorneo.placeholderEquipo = Nombre del equipo a registrar
 crearTorneo.agregarEquipoButton = +
@@ -15,11 +16,15 @@ showTorneos.nuevoTorneoButton = Nuevo torneo
 # Torneo controller
 torneoController.exitoCrearTorneo = Torneo creado exitosamente
 torneoController.noHayTorneo = No se pudo conseguir el torneo
+torneoController.torneoEditado = El torneo fue actualizado exitosamente
+torneoController.errorEditandoTorneo = Ocurri&oacute; un error modificando el torneo
 
 
 # Vista de detalles del torneo
 torneoDetails.tituloVentana = Detalles del torneo
+torneoDetails.editarTorneo = Editar
 torneoDetails.editarEquipo = Editar
+torneoDetails.agregarEquipoButton = Nuevo Equipo
 torneoDetails.agregarEquipo.header = Agregar equipo
 torneoDetails.agregarEquipo.equipoPlaceholder = Nombre del nuevo equipo
 torneoDetails.agregarEquipo.submit=Crear
@@ -34,5 +39,10 @@ equipoController.equipoNoExiste = El equipo especificado no existe
 equipoController.equipoEditado = El equipo fue editado exitosamente
 equipoController.errorEdicionEquipo = Disculpe. Ha ocurrido un error editando el equipo. Por favor intente m&aacute;s tarde.
 
+# Equipo controller
 equipoController.equipoEliminado = El equipo fue eliminado exitosamente
 equipoController.errorEliminarEquipo = Ha ocurrido alg&uacute;n error eliminando el equipo...
+
+# Editar torneo
+editarTorneo.title = Editar torneo
+editarTorneo.editButton = Guardar
