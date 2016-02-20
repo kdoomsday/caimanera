@@ -34,6 +34,8 @@ torneoDetails.agregarEquipo.cerrar=Cerrar
 torneoDetails.agregarEquipoButton.tooltip=Agregar un equipo al torneo
 torneoDetails.eliminarEquipo = Eliminar
 torneoDetails.eliminarEquipo.tooltip=Eliminar equipo
+torneoDetails.exit = Salir
+torneoDetails.exit.tooltip = Volver a listado de torneos
 
 # Editar equipo
 editarEquipo.title = Modificar equipo

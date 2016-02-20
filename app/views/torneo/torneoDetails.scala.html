@@ -3,58 +3,68 @@
 
 @layout.bootstrap(messages("torneoDetails.tituloVentana"), scripts=Seq(routes.Assets.versioned("javascripts/crearTorneo.js").url)) {
   <div class="container">
-    <h1>
-      @t.nombre
-      <a href="@routes.TorneoController.editarTorneo(t.id)" class="btn btn-default btn-xs"
-        title="@messages("torneoDetails.editarTorneo.tooltip")">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="sr-only">@messages("torneoDetails.editarTorneo")</span>
-      </a>
-    </h1>
+    <div classs="row">
+	    <h1 class="col-md-11">
+	      @t.nombre
+	      <a href="@routes.TorneoController.editarTorneo(t.id)" class="btn btn-default btn-xs"
+	        title="@messages("torneoDetails.editarTorneo.tooltip")">
+	        <span class="glyphicon glyphicon-pencil"></span>
+	        <span class="sr-only">@messages("torneoDetails.editarTorneo")</span>
+	      </a>
+	    </h1>
+	    
+	    <a href="@routes.TorneoController.showTorneos()" class="col-md-1 btn btn-default"
+	      title="@messages("torneoDetails.exit.tooltip")">
+	      <span class="glyphicon glyphicon-log-out"></span>
+	      <span class="sr-only">@messages("torneoDetails.exit")</span>
+	    </a>
+    </div>
   
   
-    <h2 class="col-md-12">
-      Equipos
-    </h2>
-      
-    <button type="button" class="btn btn-primary col-md-2 col-md-offset-5" data-toggle="modal" data-target="#nuevosEquipos"
-      title="@messages("torneoDetails.agregarEquipoButton.tooltip")">
-      <span class="glyphicon glyphicon-plus"></span>
-      <span class="sr-only">@messages("torneoDetails.agregarEquipoButton")</span>
-    </button>
-    
-    <table class="table">
-      <thead>
-        <tr>
-          <td class="col-md-10"><strong>Nombre</strong></td>
-          <td class="col-md=1"></td>
-          <td class="col-md=1"></td>
-        </tr>
-      </thead>
-      
-      <tbody>
-        @for(e <- es) {
-          <tr>
-            <td class="col-md-10">@e.nombre</td>
-            <td class="col-md-1">
-              <a href="@routes.EquipoController.editarEquipoView(t.id, e.id)"
-                class="btn btn-default btn-sm" title="@messages("torneoDetails.editarEquipo.tooltip")">
-                <span class="glyphicon glyphicon-pencil"></span>
-                <span class="sr-only">@messages("torneoDetails.editarEquipo")</span>
-              </a>
-            </td>
-            <td class="col-md-1">
-              <a href="@routes.EquipoController.eliminarEquipo(t.id, e.id)"
-                class="btn btn-danger btn-sm" title="@messages("torneoDetails.eliminarEquipo.tooltip")">
-                <span class="glyphicon glyphicon-remove"></span>
-                <span class="sr-only">@messages("torneoDetails.eliminarEquipo")</span>
-              </a>
-            </td>
-          </tr>
-        }
-      </tbody>
-      
-    </table>
+    <div class="row">
+	    <h2 class="col-md-12">
+	      Equipos
+	    </h2>
+	      
+	    <button type="button" class="btn btn-primary col-md-2 col-md-offset-5" data-toggle="modal" data-target="#nuevosEquipos"
+	      title="@messages("torneoDetails.agregarEquipoButton.tooltip")">
+	      <span class="glyphicon glyphicon-plus"></span>
+	      <span class="sr-only">@messages("torneoDetails.agregarEquipoButton")</span>
+	    </button>
+	    
+	    <table class="table">
+	      <thead>
+	        <tr>
+	          <td class="col-md-10"><strong>Nombre</strong></td>
+	          <td class="col-md=1"></td>
+	          <td class="col-md=1"></td>
+	        </tr>
+	      </thead>
+	      
+	      <tbody>
+	        @for(e <- es) {
+	          <tr>
+	            <td class="col-md-10">@e.nombre</td>
+	            <td class="col-md-1">
+	              <a href="@routes.EquipoController.editarEquipoView(t.id, e.id)"
+	                class="btn btn-default btn-sm" title="@messages("torneoDetails.editarEquipo.tooltip")">
+	                <span class="glyphicon glyphicon-pencil"></span>
+	                <span class="sr-only">@messages("torneoDetails.editarEquipo")</span>
+	              </a>
+	            </td>
+	            <td class="col-md-1">
+	              <a href="@routes.EquipoController.eliminarEquipo(t.id, e.id)"
+	                class="btn btn-danger btn-sm" title="@messages("torneoDetails.eliminarEquipo.tooltip")">
+	                <span class="glyphicon glyphicon-remove"></span>
+	                <span class="sr-only">@messages("torneoDetails.eliminarEquipo")</span>
+	              </a>
+	            </td>
+	          </tr>
+	        }
+	      </tbody>
+	      
+	    </table>
+    </div>
     
       
     <!-- Div para el dialogo modal -->
