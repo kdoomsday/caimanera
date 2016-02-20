@@ -5,13 +5,24 @@
   <div class="container">
     <h1>
       @t.nombre
-      <a href="@routes.TorneoController.editarTorneo(t.id)">
-        <small>@messages("torneoDetails.editarTorneo")</small>
+      <a href="@routes.TorneoController.editarTorneo(t.id)" class="btn btn-default btn-xs"
+        title="@messages("torneoDetails.editarTorneo.tooltip")">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="sr-only">@messages("torneoDetails.editarTorneo")</span>
       </a>
     </h1>
   
   
-    <h2 class="col-md-12">Equipos</h2>
+    <h2 class="col-md-12">
+      Equipos
+    </h2>
+      
+    <button type="button" class="btn btn-primary col-md-2 col-md-offset-5" data-toggle="modal" data-target="#nuevosEquipos"
+      title="@messages("torneoDetails.agregarEquipoButton.tooltip")">
+      <span class="glyphicon glyphicon-plus"></span>
+      <span class="sr-only">@messages("torneoDetails.agregarEquipoButton")</span>
+    </button>
+    
     <table class="table">
       <thead>
         <tr>
@@ -25,44 +36,53 @@
         @for(e <- es) {
           <tr>
             <td class="col-md-10">@e.nombre</td>
-            <td class="col-md-1"><a href="@routes.EquipoController.editarEquipoView(t.id, e.id)">@messages("torneoDetails.editarEquipo")</a></td>
-            <td class="col-md-1 btn btn-default"><a href="@routes.EquipoController.eliminarEquipo(t.id, e.id)">@messages("torneoDetails.eliminarEquipo")</a></td>
+            <td class="col-md-1">
+              <a href="@routes.EquipoController.editarEquipoView(t.id, e.id)"
+                class="btn btn-default btn-sm" title="@messages("torneoDetails.editarEquipo.tooltip")">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <span class="sr-only">@messages("torneoDetails.editarEquipo")</span>
+              </a>
+            </td>
+            <td class="col-md-1">
+              <a href="@routes.EquipoController.eliminarEquipo(t.id, e.id)"
+                class="btn btn-danger btn-sm" title="@messages("torneoDetails.eliminarEquipo.tooltip")">
+                <span class="glyphicon glyphicon-remove"></span>
+                <span class="sr-only">@messages("torneoDetails.eliminarEquipo")</span>
+              </a>
+            </td>
           </tr>
         }
       </tbody>
       
     </table>
     
-    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#nuevosEquipos" >
-        @messages("torneoDetails.agregarEquipoButton")
-      </button>
       
-      <!-- Div para el dialogo modal -->
-      <div id="nuevosEquipos" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-               <button type="button" class="close" data-dismiss="modal">&times;</button>
-               <h4 class="modal-title">@messages("torneoDetails.agregarEquipo.header")</h4>
+    <!-- Div para el dialogo modal -->
+    <div id="nuevosEquipos" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h4 class="modal-title">@messages("torneoDetails.agregarEquipo.header")</h4>
+          </div>
+          
+          <div class="modal-body">
+            <div class="row">
+              <input type="text" class="col-md-10" name="nombreEquipo" id="nombreEquipo"
+                placeholder="@messages("torneoDetails.agregarEquipo.equipoPlaceholder")"></input>
+                
+              <button class="col-md-2 btn btn-default btn-sm"
+                onclick="addEquipo('@routes.EquipoController.addEquipo', 'nuevosEquipos', 'nombreEquipo', '@t.id');">
+                @messages("torneoDetails.agregarEquipo.submit")
+              </button>
             </div>
-            
-            <div class="modal-body">
-              <div class="row">
-                <input type="text" class="col-md-10" name="nombreEquipo" id="nombreEquipo"
-                  placeholder="@messages("torneoDetails.agregarEquipo.equipoPlaceholder")"></input>
-                  
-                <button class="col-md-2 btn btn-default btn-sm"
-                  onclick="addEquipo('@routes.EquipoController.addEquipo', 'nuevosEquipos', 'nombreEquipo', '@t.id');">
-                  @messages("torneoDetails.agregarEquipo.submit")
-                </button>
-              </div>
-            </div>
-            
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">@messages("torneoDetails.agregarEquipo.cerrar")</button>
-            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@messages("torneoDetails.agregarEquipo.cerrar")</button>
           </div>
         </div>
       </div>
+    </div>
   </div>
 }
