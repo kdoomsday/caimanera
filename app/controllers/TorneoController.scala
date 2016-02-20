@@ -102,7 +102,7 @@ class TorneoController @javax.inject.Inject() (
             val flash = 
               if (success) "success" → messagesApi("torneoController.torneoEditado")
               else         "error"   → messagesApi("torneoController.errorEditandoTorneo")
-            Redirect(routes.TorneoController.showTorneos()).flashing(flash)
+            Redirect(routes.TorneoController.torneoDetails(id)).flashing(flash)
           }
         }
     )
