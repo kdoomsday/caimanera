@@ -82,6 +82,7 @@
                 placeholder="@messages("torneoDetails.agregarEquipo.equipoPlaceholder")"></input>
                 
               <button class="col-md-2 btn btn-default btn-sm"
+                id="botonCrearEquipo"
                 onclick="addEquipo('@routes.EquipoController.addEquipo', 'nuevosEquipos', 'nombreEquipo', '@t.id');">
                 @messages("torneoDetails.agregarEquipo.submit")
               </button>
@@ -100,6 +101,12 @@
     $(document).ready( function() {
 	    $('#nuevosEquipos').on('shown.bs.modal', function() {
 	        $('#nombreEquipo').focus();
+	    });
+
+	    $("#nombreEquipo").keyup(function(event){
+	        if(event.keyCode == 13){
+	            $("#botonCrearEquipo").click();
+	        }
 	    });
     })
   </script>
