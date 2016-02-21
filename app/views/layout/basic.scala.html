@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
     @for(stylesheet <- stylesheets) {<link rel="stylesheet" media="screen" href="@stylesheet" />}
+    
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/enableTooltips.js")"></script>
   </head>
   <body@bodyClass.map(c => Html(" class=\"" + c + "\""))>
     @util.navbar()

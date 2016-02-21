@@ -13,8 +13,18 @@
 	        <tbody>
 				    @for(t <- ts) {
 				        <tr>
-				          <td class="col-md-10"><a href="@routes.TorneoController.torneoDetails(t.id)">@{t.nombre}</a></td>
-				          <td class="col-md-2"><a class="btn btn-default" href="@routes.TorneoController.torneoRemove(t.id)">-</a></td>
+				          <td class="col-md-11"><a href="@routes.TorneoController.torneoDetails(t.id)">@{t.nombre}</a></td>
+				          
+				          <td class="col-md-1">
+				            <a href="@routes.TorneoController.torneoRemove(t.id)"
+				              class="btn btn-danger"
+				              data-toggle="tooltip"
+				              title="@messages("showTorneos.eliminarTorneo")"
+				            >
+				              <span class="glyphicon glyphicon-remove"></span>
+                      <span class="sr-only">@messages("showTorneos.eliminarTorneo")</span>
+				            </a>
+				          </td>
 				        </tr>
 				    }
 	        </tbody>
@@ -23,7 +33,12 @@
     </div>
     
     <a href="@routes.TorneoController.createTorneo"
-      class="btn btn-primary col-md-2 col-md-offset-5">
-        @messages("showTorneos.nuevoTorneoButton")
+      class="btn btn-primary col-md-2 col-md-offset-5"
+      data-toggle="tooltip"
+      title="@messages("showTorneos.agregarTorneoButton")"
+    >
+      
+      <span class="glyphicon glyphicon-plus"></span>
+      <span class="sr-only">@messages("showTorneos.agregarTorneoButton")</span>
     </a>
 }
