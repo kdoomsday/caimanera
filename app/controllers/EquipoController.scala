@@ -72,6 +72,12 @@ class EquipoController @javax.inject.Inject() (
     )
   }
   
+  def addEquipoSuccess(idtorneo: Long) = withAuthenticatedSession { implicit request ⇒
+    Future.successful(Redirect(routes.TorneoController.torneoDetails(idtorneo)).flashing(
+        "success" → messagesApi("equipoController.equipoAgregado")
+    ))
+  }
+  
   def eliminarEquipo(idtorneo: Long, idequipo: Long) = withAuthenticatedSession { implicit request ⇒
     dao.eliminarEquipo(idequipo).map { res ⇒
       val flash = if (res) "success" → messagesApi("equipoController.equipoEliminado")

@@ -13,7 +13,7 @@ var equipoSpace = {
 		}
 }
 
-function addEquipo(route, dialogId, textNombre, idtorneo) {
+function addEquipo(route, routeSuccess, dialogId, textNombre, idtorneo) {
 	$.ajax({
 		url: route,
 		type: "POST",
@@ -25,7 +25,7 @@ function addEquipo(route, dialogId, textNombre, idtorneo) {
 		success: function(data, textStatus, jqXHR) {
 			$('#'+textNombre).val('');
 			$('#'+dialogId).modal('toggle');
-	        location.reload();
+	        location.replace(routeSuccess);
 	    },
 	    error: function(jqXHR, textStatus, errorThrown) {
           window.alert(textStatus);

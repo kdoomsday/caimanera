@@ -90,7 +90,7 @@
                 
               <button class="col-md-2 btn btn-default btn-sm"
                 id="botonCrearEquipo"
-                onclick="addEquipo('@routes.EquipoController.addEquipo', 'nuevosEquipos', 'nombreEquipo', '@t.id');">
+                onclick="addEquipo('@routes.EquipoController.addEquipo', '@routes.EquipoController.addEquipoSuccess(t.id)', 'nuevosEquipos', 'nombreEquipo', '@t.id');">
                 @messages("torneoDetails.agregarEquipo.submit")
               </button>
             </div>
