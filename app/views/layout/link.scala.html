@@ -1,0 +1,25 @@
+@* link Template File *@
+@(route: play.api.mvc.Call,
+  linkType: models.layouts.LinkType,
+  classExtra: String,
+  messageRoot: String
+  )(implicit messages: Messages)
+  
+@import models.layouts._
+
+@defining(linkType match {
+  case LinkAdd => "btn-primary"
+  case LinkRemove => "btn-danger"
+  case _ => "btn-default"
+}) { decoration =>
+
+	<a href="@route"
+	      class="@{s"btn $decoration $classExtra"}"
+	      data-toggle="tooltip"
+	      title="@messages(s"$messageRoot.tooltip")"
+	    >
+	    
+	   <span class="glyphicon @linkType.glyphicon.getOrElse("")"></span>
+     <span class="sr-only">@messages(s"$messageRoot.text")</span>
+  </a>
+}

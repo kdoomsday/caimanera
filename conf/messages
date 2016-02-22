@@ -11,8 +11,10 @@ errorCrearTorneo = Error creando el torneo
 # Show torneos
 torneoEliminado = El torneo fue eliminado exitosamente
 torneoEliminadoWrong = El numero de torneos eliminado no fue 1
-showTorneos.eliminarTorneo = Eliminar torneo
-showTorneos.agregarTorneoButton = Crear nuevo torneo
+showTorneos.eliminarTorneo.tooltip = Eliminar torneo
+showTorneos.eliminarTorneo.text = Eliminar torneo
+showTorneos.agregarTorneoButton.tooltip = Crear nuevo torneo
+showTorneos.agregarTorneoButton.text = Nuevo torneo
 
 # Torneo controller
 torneoController.exitoCrearTorneo = Torneo creado exitosamente
@@ -23,9 +25,9 @@ torneoController.errorEditandoTorneo = Ocurri&oacute; un error modificando el to
 
 # Vista de detalles del torneo
 torneoDetails.tituloVentana = Detalles del torneo
-torneoDetails.editarTorneo = Editar
+torneoDetails.editarTorneo.text = Editar
 torneoDetails.editarTorneo.tooltip = Editar el torneo
-torneoDetails.editarEquipo = Editar
+torneoDetails.editarEquipo.text = Editar equipo
 torneoDetails.editarEquipo.tooltip = Editar datos del equipo
 torneoDetails.agregarEquipoButton = Nuevo Equipo
 torneoDetails.agregarEquipo.header = Agregar equipo
@@ -33,9 +35,9 @@ torneoDetails.agregarEquipo.equipoPlaceholder = Nombre del nuevo equipo
 torneoDetails.agregarEquipo.submit=Crear
 torneoDetails.agregarEquipo.cerrar=Cerrar
 torneoDetails.agregarEquipoButton.tooltip=Agregar un equipo al torneo
-torneoDetails.eliminarEquipo = Eliminar
+torneoDetails.eliminarEquipo.text = Eliminar
 torneoDetails.eliminarEquipo.tooltip=Eliminar equipo
-torneoDetails.exit = Salir
+torneoDetails.exit.text = Salir
 torneoDetails.exit.tooltip = Volver a listado de torneos
 
 # Editar equipo

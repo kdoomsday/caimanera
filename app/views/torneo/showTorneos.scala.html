@@ -16,14 +16,11 @@
 				          <td class="col-md-11"><a href="@routes.TorneoController.torneoDetails(t.id)">@{t.nombre}</a></td>
 				          
 				          <td class="col-md-1">
-				            <a href="@routes.TorneoController.torneoRemove(t.id)"
-				              class="btn btn-danger"
-				              data-toggle="tooltip"
-				              title="@messages("showTorneos.eliminarTorneo")"
-				            >
-				              <span class="glyphicon glyphicon-remove"></span>
-                      <span class="sr-only">@messages("showTorneos.eliminarTorneo")</span>
-				            </a>
+				            @layout.link(routes.TorneoController.torneoRemove(t.id),
+				              layouts.LinkRemove,
+				              "",
+				              "showTorneos.eliminarTorneo")
+				              
 				          </td>
 				        </tr>
 				    }
@@ -32,13 +29,9 @@
       </div>
     </div>
     
-    <a href="@routes.TorneoController.createTorneo"
-      class="btn btn-primary col-md-2 col-md-offset-5"
-      data-toggle="tooltip"
-      title="@messages("showTorneos.agregarTorneoButton")"
-    >
-      
-      <span class="glyphicon glyphicon-plus"></span>
-      <span class="sr-only">@messages("showTorneos.agregarTorneoButton")</span>
-    </a>
+    @layout.link(
+      routes.TorneoController.createTorneo,
+      models.layouts.LinkAdd,
+      "col-md-2 col-md-offset-5",
+      "showTorneos.agregarTorneoButton")
 }
