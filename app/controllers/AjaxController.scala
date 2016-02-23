@@ -17,7 +17,7 @@ class AjaxController @javax.inject.Inject() (
   val notifyForm = Form(
       tuple (
           "level"   → nonEmptyText,
-          "message" → text
+          "messageKey" → text
       )
   )
   
@@ -26,8 +26,8 @@ class AjaxController @javax.inject.Inject() (
       notifyForm.bindFromRequest.fold(
           hasErrors ⇒ BadRequest("error"),
           data ⇒ {
-            val (level, message) = data
-          	Ok(views.html.util.notificar(message, NotifyLevel(level)))
+            val (level, messageKey) = data
+          	Ok(views.html.util.notificar(messagesApi(messageKey), NotifyLevel(level)))
           }
       )
     )

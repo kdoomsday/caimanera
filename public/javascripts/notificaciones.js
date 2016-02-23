@@ -4,7 +4,7 @@ function notificar(textMessage, levelChoose) {
 		type: "POST",
 		data: {
 			level: levelChoose,
-			message: textMessage
+			messageKey: textMessage
 		},
 		success: function(data, textStatus, jqXHR) {
 			$('#notifications').append(data);
