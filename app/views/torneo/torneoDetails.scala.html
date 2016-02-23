@@ -1,7 +1,9 @@
 @* torneoDetails Template File *@
 @(t: Torneo, es: Seq[Equipo])(implicit flash: Flash, messages: Messages)
 
-@layout.bootstrap(messages("torneoDetails.tituloVentana"), scripts=Seq(routes.Assets.versioned("javascripts/crearTorneo.js").url)) {
+@layout.bootstrap(messages("torneoDetails.tituloVentana"),
+  scripts = Seq(routes.Assets.versioned("javascripts/crearTorneo.js").url)
+){
   <div class="container">
     <div classs="row">
 	    <h1 class="col-md-11">
