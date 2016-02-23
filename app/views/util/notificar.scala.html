@@ -1,0 +1,11 @@
+@* notify Template File *@
+@(message: String, level: layouts.NotifyLevel)
+
+<div class="row">
+  <div class="alert @level.alertClass alert-dismissible col-md-10 col-md-offset-1" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    @message
+  </div>
+</div>

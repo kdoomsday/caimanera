@@ -21,6 +21,11 @@
   <body@bodyClass.map(c => Html(" class=\"" + c + "\""))>
     @util.navbar()
     @util.flashNotify()
+    
+    <div class="row">
+      <div id="notifications"></div>
+    </div>
+     
     @content
   </body>
 </html>

@@ -1,21 +1,10 @@
 @* flashNotify Template File *@
 @()(implicit flash: Flash)
 
+@import layouts.NotifyLevel
 
-@showLevel(level: String, alertClass: String) = {
-  @for(message <- flash.get(level)) {
-    <div class="row">
-      <div class="alert @alertClass alert-dismissible col-md-10 col-md-offset-1" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        @message
-      </div>
-    </div>
+@for(level <- NotifyLevel.levels) {
+  @for(message <- flash.get(level.name)) {
+    @notificar(message, level)
   }
 }
-
-@showLevel("error", "alert-danger")
-@showLevel("warning", "alert-warning")
-@showLevel("success", "alert-success")
-@showLevel("info", "alert-info")
