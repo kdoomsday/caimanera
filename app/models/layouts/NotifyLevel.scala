@@ -19,20 +19,20 @@ object NotifyLevel {
 
 case object NotifyError extends NotifyLevel {
   val name = "error"
-  val alertClass = "alert-danger"
+  val alertClass = "error"
 }
 
 case object NotifySuccess extends NotifyLevel {
   val name = "success"
-  val alertClass = "alert-success"
+  val alertClass = "success"
 }
 
 case object NotifyInfo extends NotifyLevel {
   val name = "info"
-  val alertClass = "alert-info"
+  val alertClass = "info"
 }
 
 case object NotifyWarning extends NotifyLevel {
   val name = "warning"
-  val alertClass = "alert-warning"
+  val alertClass = "warn"
 }
