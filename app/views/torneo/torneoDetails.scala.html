@@ -86,21 +86,20 @@
           </div>
           
           <div class="modal-body">
-            <div class="row">
-              <input type="text" class="col-md-10" name="nombreEquipo" id="nombreEquipo"
+            <div class="input-group">
+              <input type="text" class="form-control" name="nombreEquipo" id="nombreEquipo"
                 placeholder="@messages("torneoDetails.agregarEquipo.equipoPlaceholder")"></input>
                 
-              <button class="col-md-2 btn btn-default btn-sm"
-                id="botonCrearEquipo"
-                onclick="addEquipo('@routes.EquipoController.addEquipo', '@routes.EquipoController.addEquipoSuccess(t.id)', 'nuevosEquipos', 'nombreEquipo', '@t.id');">
-                @messages("torneoDetails.agregarEquipo.submit")
-              </button>
+              <span class="input-group-btn">
+	              <button class="btn btn-primary"
+	                id="botonCrearEquipo"
+	                onclick="addEquipo('@routes.EquipoController.addEquipo', '@routes.EquipoController.addEquipoSuccess(t.id)', 'nuevosEquipos', 'nombreEquipo', '@t.id');">
+	                @messages("torneoDetails.agregarEquipo.submit")
+	              </button>
+              </span>
             </div>
           </div>
           
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">@messages("torneoDetails.agregarEquipo.cerrar")</button>
-          </div>
         </div>
       </div>
     </div>
