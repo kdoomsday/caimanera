@@ -82,4 +82,9 @@ class TorneoDaoSlick extends TorneoDao
       equipos += Equipo(-1L, nombre, idtorneo)
     }.map { amnt => amnt == 1 }
   }
+  
+  
+  override def equiposTorneo(idtorneo: Long): Future[Seq[Equipo]] = db.run {
+    equipos.filter { _.idtorneo ===  idtorneo }.result
+  }
 }

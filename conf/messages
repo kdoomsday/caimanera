@@ -56,3 +56,6 @@ equipoController.errorEliminarEquipo = Ha ocurrido alg&uacute;n error eliminando
 # Editar torneo
 editarTorneo.title = Editar torneo
 editarTorneo.editButton = Guardar
+
+# Registrar Partido
+registrarPartido.title = Registrar Partido

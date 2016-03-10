@@ -39,17 +39,23 @@ trait SlickDBTables {
   
   class Partidos(tag: Tag) extends Table[Partido](tag, "partido") {
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+    def idtorneo = column[Long]("idtorneo")
     def idcasa = column[Long]("idcasa")
     def idvisitante = column[Long]("idvisitante")
     def fecha = column[Timestamp]("fecha")
     def scoreCasa = column[Int]("scoreCasa", O.Default(0))
     def scoreVisitante = column[Int]("scoreVisitante", O.Default(0))
     
-    def * = (id, idcasa, idvisitante, fecha, scoreCasa, scoreVisitante).shaped <> (
-      { case (id, idcasa, idvisitante, fecha, scoreCasa, scoreVisitante) ⇒
-          Partido(idcasa, idvisitante, new DateTime(fecha), scoreCasa, scoreVisitante)
+    import ForeignKeyAction.Restrict
+    foreignKey("fk_partido_torneo", idtorneo, torneos)(_.id, onDelete=Restrict, onUpdate=Restrict)
+    foreignKey("fk_casa_equipo", idcasa, equipos)(_.id, onDelete=Restrict, onUpdate=Restrict)
+    foreignKey("fk_visitante_equipo", idvisitante, equipos)(_.id, onDelete=Restrict, onUpdate=Restrict)
+    
+    def * = (id, idtorneo, idcasa, idvisitante, fecha, scoreCasa, scoreVisitante).shaped <> (
+      { case (id, idtorneo, idcasa, idvisitante, fecha, scoreCasa, scoreVisitante) ⇒
+          Partido(idtorneo, idcasa, idvisitante, new DateTime(fecha), scoreCasa, scoreVisitante)
       },
-      { p: Partido ⇒ Some((-1L, p.idcasa, p.idvisitante, datetime2Timestamp(p.fecha), p.scoreCasa, p.scoreVisitante)) }
+      { p: Partido ⇒ Some((-1L, p.idTorneo, p.idcasa, p.idvisitante, datetime2Timestamp(p.fecha), p.scoreCasa, p.scoreVisitante)) }
     )
   }
   
@@ -68,7 +74,8 @@ trait SlickDBTables {
   }
   
   
-  val torneos = TableQuery[Torneos]
-  val users   = TableQuery[Users]
-  val equipos = TableQuery[Equipos]
+  val torneos =  TableQuery[Torneos]
+  val users   =  TableQuery[Users]
+  val equipos =  TableQuery[Equipos]
+  val partidos = TableQuery[Partidos]
 }

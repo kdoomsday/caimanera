@@ -121,4 +121,9 @@ class TorneoController @javax.inject.Inject() (
       case None ⇒ Redirect(routes.TorneoController.showTorneos()).flashing("error" → messagesApi("torneoController.noHayTorneo"))
     })
   }
+  
+  
+  def registrarPartido = withAuthenticatedSession { implicit request ⇒
+    Future.successful(Ok(views.html.torneo.registrarPartido()))
+  }
 }

@@ -41,4 +41,7 @@ trait TorneoDao {
   
   /** Agregar un equipo a un torneo. Devuelve si la operacion fue exitosa */
   def addEquipo(nombre: String, idtorneo: Long): Future[Boolean]
+  
+  /** Todos los equipos registrados en un torneo */
+  def equiposTorneo(idtorneo: Long): Future[Seq[Equipo]]
 }
