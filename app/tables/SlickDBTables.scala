@@ -1,14 +1,19 @@
 package tables
 
 import slick.driver.JdbcProfile
-import models.Torneo
+import models.{ Torneo, Equipo, Partido }
 import java.util.UUID
 import java.sql.Timestamp
-import models.Equipo
+import com.github.nscala_time.time.Imports._
+import org.joda.time.DateTime
 
 trait SlickDBTables {
   protected val driver: JdbcProfile
   import driver.api._
+  
+  
+  def datetime2Timestamp(d: DateTime): Timestamp = new Timestamp(d.getMillis)
+  
   
   class Torneos(tag: Tag) extends Table[Torneo](tag, "torneo") {
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
@@ -29,6 +34,23 @@ trait SlickDBTables {
     def * = (id, nombre, idtorneo) <> (Equipo.tupled, Equipo.unapply)
     
     foreignKey("fk_torneo", idtorneo, torneos)(_.id, onUpdate=ForeignKeyAction.Cascade, onDelete=ForeignKeyAction.Cascade)
+  }
+  
+  
+  class Partidos(tag: Tag) extends Table[Partido](tag, "partido") {
+    def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+    def idcasa = column[Long]("idcasa")
+    def idvisitante = column[Long]("idvisitante")
+    def fecha = column[Timestamp]("fecha")
+    def scoreCasa = column[Int]("scoreCasa", O.Default(0))
+    def scoreVisitante = column[Int]("scoreVisitante", O.Default(0))
+    
+    def * = (id, idcasa, idvisitante, fecha, scoreCasa, scoreVisitante).shaped <> (
+      { case (id, idcasa, idvisitante, fecha, scoreCasa, scoreVisitante) ⇒
+          Partido(idcasa, idvisitante, new DateTime(fecha), scoreCasa, scoreVisitante)
+      },
+      { p: Partido ⇒ Some((-1L, p.idcasa, p.idvisitante, datetime2Timestamp(p.fecha), p.scoreCasa, p.scoreVisitante)) }
+    )
   }
   
   

@@ -17,10 +17,11 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-slick-evolutions" % "1.1.1",
   "org.postgresql" % "postgresql" % "9.3-1102-jdbc41",
   "ch.qos.logback" % "logback-classic" % "1.1.3",
-  "org.webjars" % "notifyjs" % "0.3.2"
+  "org.webjars" % "notifyjs" % "0.3.2",
+  "com.github.nscala-time" %% "nscala-time" % "2.10.0",
+  "joda-time" % "joda-time" % "2.9.2"
 )
 
 routesGenerator := InjectedRoutesGenerator
 
-
-//fork in run := true
+fork in run := true
