@@ -43,13 +43,13 @@ trait SlickDBTables {
     def idcasa = column[Long]("idcasa")
     def idvisitante = column[Long]("idvisitante")
     def fecha = column[Timestamp]("fecha")
-    def scoreCasa = column[Int]("scoreCasa", O.Default(0))
-    def scoreVisitante = column[Int]("scoreVisitante", O.Default(0))
+    def scoreCasa = column[Int]("scorecasa", O.Default(0))
+    def scoreVisitante = column[Int]("scorevisitante", O.Default(0))
     
-    import ForeignKeyAction.Restrict
-    foreignKey("fk_partido_torneo", idtorneo, torneos)(_.id, onDelete=Restrict, onUpdate=Restrict)
-    foreignKey("fk_casa_equipo", idcasa, equipos)(_.id, onDelete=Restrict, onUpdate=Restrict)
-    foreignKey("fk_visitante_equipo", idvisitante, equipos)(_.id, onDelete=Restrict, onUpdate=Restrict)
+    import ForeignKeyAction.Cascade
+    foreignKey("fk_partido_torneo", idtorneo, torneos)(_.id, onDelete=Cascade, onUpdate=Cascade)
+    foreignKey("fk_casa_equipo", idcasa, equipos)(_.id, onDelete=Cascade, onUpdate=Cascade)
+    foreignKey("fk_visitante_equipo", idvisitante, equipos)(_.id, onDelete=Cascade, onUpdate=Cascade)
     
     def * = (id, idtorneo, idcasa, idvisitante, fecha, scoreCasa, scoreVisitante).shaped <> (
       { case (id, idtorneo, idcasa, idvisitante, fecha, scoreCasa, scoreVisitante) ⇒

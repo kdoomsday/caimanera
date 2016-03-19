@@ -39,6 +39,8 @@ torneoDetails.eliminarEquipo.text = Eliminar
 torneoDetails.eliminarEquipo.tooltip=Eliminar equipo
 torneoDetails.exit.text = Salir
 torneoDetails.exit.tooltip = Volver a listado de torneos
+torneoDetails.equipos.header = Equipos
+torneoDetails.partidos.header = Partidos
 
 # Editar equipo
 editarEquipo.title = Modificar equipo

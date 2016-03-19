@@ -1,5 +1,5 @@
 @* torneoDetails Template File *@
-@(t: Torneo, es: Seq[Equipo])(implicit flash: Flash, messages: Messages)
+@(t: Torneo, es: Seq[Equipo], ps: Seq[Partido])(implicit flash: Flash, messages: Messages)
 
 @layout.bootstrap(messages("torneoDetails.tituloVentana"),
   scripts = Seq(routes.Assets.versioned("javascripts/crearTorneo.js").url)
@@ -27,7 +27,7 @@
   
     <div class="row">
 	    <h2 class="col-md-12">
-	      Equipos
+	      @messages("torneoDetails.equipos.header")
 	    </h2>
 
       <span data-toggle="modal" data-target="#nuevosEquipos">
@@ -74,6 +74,31 @@
 	      
 	    </table>
     </div>
+    
+    
+    <div class="row">
+      <h2>@messages("torneoDetails.partidos.header")</h2>
+      
+      @if(!ps.isEmpty) {
+	      <table class="table">
+	        <thead>
+	          <tr>
+	            <td>Id Casa</td>
+	            <td>Id Visitante</td>
+	        </thead>
+	        
+	        <tbody>
+	          @for(p <- ps) {
+	            <tr>
+	              <td>@p.idcasa</td>
+	              <td>@p.idvisitante</td>
+	            </tr>
+	          }
+	        </tbody>
+	      </table>
+      }
+    </div>
+    
     
       
     <!-- Div para el dialogo modal -->

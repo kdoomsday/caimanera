@@ -80,7 +80,7 @@ class TorneoController @javax.inject.Inject() (
   def editarTorneo(id: Long) = withAuthenticatedSession { implicit request ⇒
     torneoDao.details(id).map { maybeTorneo ⇒
       maybeTorneo match {
-        case Some((t, _)) ⇒
+        case Some((t, _, _)) ⇒
           val forma: Form[(Long, String)] = torneoEditForm.fill(t.id → t.nombre)
           Ok(views.html.torneo.editarTorneo(forma))
           
@@ -117,13 +117,13 @@ class TorneoController @javax.inject.Inject() (
   
   def torneoDetails(id: Long) = withAuthenticatedSession { implicit request ⇒
     torneoDao.details(id).map( oDetails ⇒ oDetails match {
-      case Some((t, es)) ⇒ Ok(views.html.torneo.torneoDetails(t, es))
+      case Some((t, es, ps)) ⇒ Ok(views.html.torneo.torneoDetails(t, es, ps))
       case None ⇒ Redirect(routes.TorneoController.showTorneos()).flashing("error" → messagesApi("torneoController.noHayTorneo"))
     })
   }
   
   
-  def registrarPartido = withAuthenticatedSession { implicit request ⇒
-    Future.successful(Ok(views.html.torneo.registrarPartido()))
+  def registrarPartido(idtorneo: Long) = withAuthenticatedSession { implicit request ⇒
+    Future.successful(Ok(views.html.torneo.registrarPartido(idtorneo)))
   }
 }

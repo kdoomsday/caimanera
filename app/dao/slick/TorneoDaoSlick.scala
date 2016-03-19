@@ -14,6 +14,7 @@ import models.Equipo
 import scala.concurrent.ExecutionContext
 import java.util.concurrent.Executors
 import models.Equipo
+import models.Partido
 
 class TorneoDaoSlick extends TorneoDao
   with HasDatabaseConfig[JdbcProfile]
@@ -53,12 +54,13 @@ class TorneoDaoSlick extends TorneoDao
   private[this] def equiposDeTorneo(idtorneo: Long): Future[Seq[Equipo]] =
     db.run(equipos.filter(_.idtorneo === idtorneo).result)
   
-  override def details(id: Long): Future[Option[(Torneo, Seq[Equipo])]] = {
+  override def details(id: Long): Future[Option[(Torneo, Seq[Equipo], Seq[Partido])]] = {
     for {
       ot ← byId(id)
       es ← equiposDeTorneo(id)
+      ps ← partidosTorneo(id)
     } yield {
-      ot.map(t ⇒ (t, es))
+      ot.map(t ⇒ (t, es, ps))
     }
   }
   
@@ -86,5 +88,10 @@ class TorneoDaoSlick extends TorneoDao
   
   override def equiposTorneo(idtorneo: Long): Future[Seq[Equipo]] = db.run {
     equipos.filter { _.idtorneo ===  idtorneo }.result
+  }
+  
+  
+  override def partidosTorneo(idtorneo: Long): Future[Seq[Partido]] = db.run {
+    partidos.filter { _.idtorneo === idtorneo }.result
   }
 }

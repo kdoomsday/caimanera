@@ -36,7 +36,7 @@ POST        /equipos/addEquipo            controllers.EquipoController.addEquipo
 GET         /equipos/eliminar/:idtorneo/:idequipo   controllers.EquipoController.eliminarEquipo(idtorneo: Long, idequipo: Long)
 
 # Partidos
-GET         /partidos/registrar           controllers.TorneoController.registrarPartido
+GET         /torneo/:id/partido/registrar controllers.TorneoController.registrarPartido(id: Long)
 
 # Notificaciones
 POST     /notificaciones/                 controllers.AjaxController.notification

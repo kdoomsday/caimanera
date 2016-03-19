@@ -4,6 +4,7 @@ import scala.concurrent.Future
 import models.Torneo
 import java.util.UUID
 import models.Equipo
+import models.Partido
 
 /**
  * Dao de obtenci&oacute;n de los torneos.
@@ -31,7 +32,7 @@ trait TorneoDao {
   def eliminarEquipo(id: Long): Future[Boolean]
   
   /** Detalles de un torneo segun su id */
-  def details(id: Long): Future[Option[(Torneo, Seq[Equipo])]]
+  def details(id: Long): Future[Option[(Torneo, Seq[Equipo], Seq[Partido])]]
   
   /** Actualizar un equipo. Devuelve si existia el equipo y fue exitosa la actualizacion */
   def actualizarEquipo(id: Long, nombre: String): Future[Boolean]
@@ -44,4 +45,6 @@ trait TorneoDao {
   
   /** Todos los equipos registrados en un torneo */
   def equiposTorneo(idtorneo: Long): Future[Seq[Equipo]]
+  
+  def partidosTorneo(idtorneo: Long): Future[Seq[Partido]]
 }
