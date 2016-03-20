@@ -1,6 +1,11 @@
 @* registrarPartido Template File *@
-@(idtorneo: Long)(implicit messages: Messages, flash: Flash)
+@(idtorneo: Long, formPartido: Form[(Long, Int, Int)])(implicit messages: Messages, flash: Flash)
 
 @layout.bootstrap(messages("registrarPartido.title")) {
   <h1>Placeholder</h1>
+
+  @helper.form(action = routes.TorneoController.registrarAction(idtorneo)) {
+  	<p>Nothing yet</p>
+  	<input type="submit">Done</input>
+  }
 }

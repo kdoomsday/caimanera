@@ -122,8 +122,27 @@ class TorneoController @javax.inject.Inject() (
     })
   }
   
+
+  val partidoForm = Form(
+    tuple(
+      "idtorneo" → of[Long],
+      "scorecasa" → number(min = 0),
+      "scorevisitante" → number(min = 0)
+    )
+  )
+
   
   def registrarPartido(idtorneo: Long) = withAuthenticatedSession { implicit request ⇒
-    Future.successful(Ok(views.html.torneo.registrarPartido(idtorneo)))
+    Future.successful(Ok(views.html.torneo.registrarPartido(idtorneo, partidoForm)))
+  }
+
+  def registrarAction(idtorneo: Long) = withAuthenticatedSession { implicit request ⇒
+    partidoForm.bindFromRequest.fold(
+      hasErrors ⇒ Future.successful(BadRequest(views.html.torneo.registrarPartido(idtorneo, hasErrors))),
+      success ⇒ {
+        // Something
+        Future.successful(Redirect(routes.TorneoController.torneoDetails(success._1)))
+      }
+    )
   }
 }
