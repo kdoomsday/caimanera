@@ -2,10 +2,21 @@
 @(idtorneo: Long, formPartido: Form[(Long, Int, Int)])(implicit messages: Messages, flash: Flash)
 
 @layout.bootstrap(messages("registrarPartido.title")) {
-  <h1>Placeholder</h1>
+  
+  
+  <div class="container">
+    @layout.pageTitle {
+      <h1>@messages("registrarPartido.title")</h1>
+    }
+  </div>
 
-  @helper.form(action = routes.TorneoController.registrarAction(idtorneo)) {
-  	<p>Nothing yet</p>
-  	<input type="submit">Done</input>
-  }
+  <div class="container">
+	  @helper.form(action = routes.TorneoController.registrarAction(idtorneo)) {
+	    @helper.inputText(formPartido("scorecasa"), 'type -> "number", '_label -> messages("registrarPartido.scorecasa.label"))
+	    
+	    @helper.inputText(formPartido("scorevisitante"), 'type -> "number", '_label -> messages("registrarPartido.scorevisitante.label"))
+	    
+	  	<input type="submit" value="Done"></input>
+	  }
+  </div>
 }
