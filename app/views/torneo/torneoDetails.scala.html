@@ -5,7 +5,8 @@
   scripts = Seq(routes.Assets.versioned("javascripts/crearTorneo.js").url)
 ){
   <div class="container">
-    <div classs="row">
+  
+    @layout.pageTitle {
 	    <h1 class="col-md-11">
 	      @t.nombre
 	      
@@ -22,7 +23,7 @@
 	      layouts.LinkExit,
 	      "col-md-1",
 	      "torneoDetails.exit")
-    </div>
+    }
   
   
     <div class="row">

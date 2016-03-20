@@ -2,9 +2,10 @@
 @(ts: Seq[models.Torneo])(implicit messages: Messages, flash: Flash)
 
 @layout.bootstrap("Listado de torneos") {
-    <div class="page-header">
-      <h1 class="col-md-12">Torneos</h1>
-    </div>
+  <div class="container">
+    @layout.pageTitle {
+      <h1>Torneos</h1>
+    }
     
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
@@ -34,4 +35,5 @@
       models.layouts.LinkAdd,
       "col-md-2 col-md-offset-5",
       "showTorneos.agregarTorneoButton")
+  </div>
 }
