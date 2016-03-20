@@ -2,7 +2,11 @@
 @(form: Form[(Long, String, Long)])(implicit flash: Flash, messages: Messages)
 
 @layout.bootstrap(messages("editarEquipo.title")) {
-  <h1>Editar equipo</h1>
+  <div class="container">
+    @layout.pageTitle {
+      <h1>Editar equipo</h1>
+    }
+  </div>
   
   <div class="container-fluid">
     <div class="jumbotron col-md-8 col-md-offset-2">
