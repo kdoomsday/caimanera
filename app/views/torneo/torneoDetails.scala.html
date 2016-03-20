@@ -79,6 +79,15 @@
     <div class="row">
       <h2>@messages("torneoDetails.partidos.header")</h2>
       
+      <a type="button"
+        class="btn btn-primary col-md-2 col-md-offset-5"
+        title="@messages("torneoDetails.partidos.agregarPartidoButton.tooltip")"
+        href="@routes.TorneoController.registrarPartido(t.id)"
+      >
+        <span class="glyphicon glyphicon-plus"></span>
+        <span class="sr-only">@messages("torneoDetails.agregarPartidoButton")</span>
+      </a>
+      
       @if(!ps.isEmpty) {
 	      <table class="table">
 	        <thead>

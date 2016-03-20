@@ -41,6 +41,8 @@ torneoDetails.exit.text = Salir
 torneoDetails.exit.tooltip = Volver a listado de torneos
 torneoDetails.equipos.header = Equipos
 torneoDetails.partidos.header = Partidos
+torneoDetails.partidos.agregarPartidoButton = Registrar Partido
+torneoDetails.partidos.agregarPartidoButton.tooltip = Registrar Partido
 
 # Editar equipo
 editarEquipo.title = Modificar equipo
