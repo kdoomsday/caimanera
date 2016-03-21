@@ -126,19 +126,22 @@ class TorneoController @javax.inject.Inject() (
   val partidoForm = Form(
     tuple(
       "idtorneo" → of[Long],
+      "idcasa" → of[Long],
       "scorecasa" → number(min = 0),
+      "idvisitante" → of[Long],
       "scorevisitante" → number(min = 0)
     )
   )
 
   
   def registrarPartido(idtorneo: Long) = withAuthenticatedSession { implicit request ⇒
-    Future.successful(Ok(views.html.torneo.registrarPartido(idtorneo, partidoForm)))
+    torneoDao.equiposTorneo(idtorneo).map(es ⇒ Ok(views.html.torneo.registrarPartido(idtorneo, es, partidoForm)))
   }
 
   def registrarAction(idtorneo: Long) = withAuthenticatedSession { implicit request ⇒
     partidoForm.bindFromRequest.fold(
-      hasErrors ⇒ Future.successful(BadRequest(views.html.torneo.registrarPartido(idtorneo, hasErrors))),
+      hasErrors ⇒ torneoDao.equiposTorneo(idtorneo).map(es ⇒
+        BadRequest(views.html.torneo.registrarPartido(idtorneo, es, hasErrors))),
       success ⇒ {
         // Something
         Future.successful(Redirect(routes.TorneoController.torneoDetails(success._1)))

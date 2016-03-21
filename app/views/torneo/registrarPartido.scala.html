@@ -1,5 +1,7 @@
 @* registrarPartido Template File *@
-@(idtorneo: Long, formPartido: Form[(Long, Int, Int)])(implicit messages: Messages, flash: Flash)
+@(idtorneo: Long,
+  equiposTorneo: Seq[Equipo],
+  formPartido: Form[(Long, Long, Int, Long, Int)])(implicit messages: Messages, flash: Flash)
 
 @layout.bootstrap(messages("registrarPartido.title")) {
   
@@ -12,11 +14,23 @@
 
   <div class="container">
 	  @helper.form(action = routes.TorneoController.registrarAction(idtorneo)) {
-	    @helper.inputText(formPartido("scorecasa"), 'type -> "number", '_label -> messages("registrarPartido.scorecasa.label"))
+	    @defining(equiposTorneo.map(e => (e.id.toString, e.nombre))) { es =>
 	    
-	    @helper.inputText(formPartido("scorevisitante"), 'type -> "number", '_label -> messages("registrarPartido.scorevisitante.label"))
-	    
-	  	<input type="submit" value="Done"></input>
+		    @helper.select(
+		      formPartido("idcasa"),
+		      options=es
+		    )
+		    @helper.inputText(formPartido("scorecasa"), 'type -> "number", '_label -> messages("registrarPartido.scorecasa.label"))
+		    
+		    
+		    @helper.select(
+		      formPartido("idvisitante"),
+		      options=es
+		    )
+		    @helper.inputText(formPartido("scorevisitante"), 'type -> "number", '_label -> messages("registrarPartido.scorevisitante.label"))
+		    
+		  	<input type="submit" value="Done"></input>
+	  	}
 	  }
   </div>
 }
