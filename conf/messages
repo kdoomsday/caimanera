@@ -65,3 +65,4 @@ editarTorneo.editButton = Guardar
 registrarPartido.title = Registrar Partido
 registrarPartido.scorecasa.label = Resultado casa
 registrarPartido.scorevisitante.label = Resultado visitante
+registrarPartido.submit.text = Guardar
