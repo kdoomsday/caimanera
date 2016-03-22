@@ -30,6 +30,8 @@
 		    @helper.inputText(formPartido("scorevisitante"), 'type -> "number", '_label -> messages("registrarPartido.scorevisitante.label"))
 		    
 		  	<input type="submit" class="btn btn-default" value="@messages("registrarPartido.submit.text")"></input>
+
+		  	<input type="hidden" name="idtorneo" value="@idtorneo"></input>
 	  	}
 	  }
   </div>
