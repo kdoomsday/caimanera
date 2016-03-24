@@ -23,7 +23,7 @@ libraryDependencies ++= Seq(
 libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap" % "3.3.5",
   "org.webjars" % "notifyjs" % "0.3.2",
-  "org.webjars" % "bootstrap-datetimepicker" % "2.3.5"
+  "org.webjars" % "Eonasdan-bootstrap-datetimepicker" % "4.17.37-1"
 )
 
 routesGenerator := InjectedRoutesGenerator
