@@ -1,7 +1,7 @@
 @* registrarPartido Template File *@
 @(idtorneo: Long,
   equiposTorneo: Seq[Equipo],
-  formPartido: Form[(Long, Long, Int, Long, Int)])(implicit messages: Messages, flash: Flash)
+  formPartido: Form[(Long, Long, Int, Long, Int, org.joda.time.DateTime)])(implicit messages: Messages, flash: Flash)
 
 @layout.bootstrap(messages("registrarPartido.title"),
   scripts=Seq(routes.Assets.versioned("lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js").url),
@@ -32,12 +32,13 @@
 		    )
 		    @helper.inputText(formPartido("scorevisitante"), 'type -> "number", '_label -> messages("registrarPartido.scorevisitante.label"))
 		    
+		    <!--
 		  	<div class="container">
 			    <div class="row">
 			        <div class='col-sm-6'>
 			            <div class="form-group">
 			                <div class='input-group date' id='datetimepicker1'>
-			                    <input type='text' class="form-control" />
+			                    <input type='text' class="form-control" name="fecha"/>
 			                    <span class="input-group-addon">
 			                        <span class="glyphicon glyphicon-calendar"></span>
 			                    </span>
@@ -54,7 +55,8 @@
 			        </script>
 			    </div>
 			  </div>
-		    
+		    -->
+		    @layout.dateInput(formPartido("fecha"), classFormat="col-sm-6")
 		    
 		  	<input type="hidden" name="idtorneo" value="@idtorneo"></input>
 		                

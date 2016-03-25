@@ -129,7 +129,8 @@ class TorneoController @javax.inject.Inject() (
       "idcasa" → of[Long],
       "scorecasa" → number(min = 0),
       "idvisitante" → of[Long],
-      "scorevisitante" → number(min = 0)
+      "scorevisitante" → number(min = 0),
+      "fecha" → jodaDate("yyyy-MM-dd HH:mm")
     )
   )
 
@@ -143,8 +144,12 @@ class TorneoController @javax.inject.Inject() (
       hasErrors ⇒ torneoDao.equiposTorneo(idtorneo).map(es ⇒
         BadRequest(views.html.torneo.registrarPartido(idtorneo, es, hasErrors))),
       success ⇒ {
+        val (idtorneo, idcasa, scorecasa, idvisitante, scorevisitante, fecha) = success
+        val msg = s"El equipo $idcasa marco $scorecasa, $idvisitante marco $scorevisitante. $fecha"
         // Something
-        Future.successful(Redirect(routes.TorneoController.torneoDetails(success._1)))
+        Future.successful(
+          Redirect(routes.TorneoController.torneoDetails(success._1)).flashing("info" → msg)
+        )
       }
     )
   }
