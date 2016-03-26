@@ -10,7 +10,7 @@ import dao.slick.TorneoDaoSlick
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
-import models.{ Torneo, Equipo }
+import models.{ Torneo, Equipo, Partido }
 import java.util.UUID
 import scala.concurrent.Future
 import models.Torneo
@@ -145,11 +145,12 @@ class TorneoController @javax.inject.Inject() (
         BadRequest(views.html.torneo.registrarPartido(idtorneo, es, hasErrors))),
       success ⇒ {
         val (idtorneo, idcasa, scorecasa, idvisitante, scorevisitante, fecha) = success
-        val msg = s"El equipo $idcasa marco $scorecasa, $idvisitante marco $scorevisitante. $fecha"
-        // Something
-        Future.successful(
-          Redirect(routes.TorneoController.torneoDetails(success._1)).flashing("info" → msg)
-        )
+        val p = Partido.tupled(success)
+        torneoDao.agregarPartido(p).map { worked ⇒
+          val flash = if (worked) "success" → messagesApi("torneoController.agregarPartido.exito")
+                      else "error" → messagesApi("torneoController.agregarPartido.error")
+          Redirect(routes.TorneoController.torneoDetails(idtorneo)).flashing(flash)
+        }
       }
     )
   }

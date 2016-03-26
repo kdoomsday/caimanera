@@ -32,30 +32,6 @@
 		    )
 		    @helper.inputText(formPartido("scorevisitante"), 'type -> "number", '_label -> messages("registrarPartido.scorevisitante.label"))
 		    
-		    <!--
-		  	<div class="container">
-			    <div class="row">
-			        <div class='col-sm-6'>
-			            <div class="form-group">
-			                <div class='input-group date' id='datetimepicker1'>
-			                    <input type='text' class="form-control" name="fecha"/>
-			                    <span class="input-group-addon">
-			                        <span class="glyphicon glyphicon-calendar"></span>
-			                    </span>
-			                </div>
-			            </div>
-			        </div>
-			        <script type="text/javascript">
-			            $(function () {
-			                $('#datetimepicker1').datetimepicker({
-				                showClose: true,
-				                showTodayButton: true
-			                });
-			            });
-			        </script>
-			    </div>
-			  </div>
-		    -->
 		    @layout.dateInput(formPartido("fecha"), classFormat="col-sm-6")
 		    
 		  	<input type="hidden" name="idtorneo" value="@idtorneo"></input>

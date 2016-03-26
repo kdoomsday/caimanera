@@ -94,4 +94,10 @@ class TorneoDaoSlick extends TorneoDao
   override def partidosTorneo(idtorneo: Long): Future[Seq[Partido]] = db.run {
     partidos.filter { _.idtorneo === idtorneo }.result
   }
+  
+  override def agregarPartido(p: Partido): Future[Boolean] = {
+    db.run {
+      partidos += p
+    }.map(_ == 1)
+  }
 }

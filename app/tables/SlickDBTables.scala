@@ -51,11 +51,11 @@ trait SlickDBTables {
     foreignKey("fk_casa_equipo", idcasa, equipos)(_.id, onDelete=Cascade, onUpdate=Cascade)
     foreignKey("fk_visitante_equipo", idvisitante, equipos)(_.id, onDelete=Cascade, onUpdate=Cascade)
     
-    def * = (id, idtorneo, idcasa, idvisitante, fecha, scoreCasa, scoreVisitante).shaped <> (
-      { case (id, idtorneo, idcasa, idvisitante, fecha, scoreCasa, scoreVisitante) ⇒
-          Partido(idtorneo, idcasa, idvisitante, new DateTime(fecha), scoreCasa, scoreVisitante)
+    def * = (id, idtorneo, idcasa, scoreCasa, idvisitante, scoreVisitante, fecha).shaped <> (
+      { case (id, idtorneo, idcasa, scoreCasa, idvisitante, scoreVisitante, fecha) ⇒
+          Partido(idtorneo, idcasa, scoreCasa, idvisitante, scoreVisitante, new DateTime(fecha))
       },
-      { p: Partido ⇒ Some((-1L, p.idTorneo, p.idcasa, p.idvisitante, datetime2Timestamp(p.fecha), p.scoreCasa, p.scoreVisitante)) }
+      { p: Partido ⇒ Some((-1L, p.idTorneo, p.idcasa, p.scoreCasa, p.idvisitante, p.scoreVisitante, datetime2Timestamp(p.fecha))) }
     )
   }
   

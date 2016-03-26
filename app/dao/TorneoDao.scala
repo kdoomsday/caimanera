@@ -47,4 +47,7 @@ trait TorneoDao {
   def equiposTorneo(idtorneo: Long): Future[Seq[Equipo]]
   
   def partidosTorneo(idtorneo: Long): Future[Seq[Partido]]
+  
+  /** Agregar un partido */
+  def agregarPartido(p: Partido): Future[Boolean]
 }

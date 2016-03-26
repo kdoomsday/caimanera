@@ -21,6 +21,8 @@ torneoController.exitoCrearTorneo = Torneo creado exitosamente
 torneoController.noHayTorneo = No se pudo conseguir el torneo
 torneoController.torneoEditado = El torneo fue actualizado exitosamente
 torneoController.errorEditandoTorneo = Ocurri&oacute; un error modificando el torneo
+torneoController.agregarPartido.exito = Equipo agregado exitosamente
+torneoController.agregarPartido.error = Error agregando partido.
 
 
 # Vista de detalles del torneo
