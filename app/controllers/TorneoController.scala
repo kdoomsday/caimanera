@@ -125,12 +125,13 @@ class TorneoController @javax.inject.Inject() (
 
   val partidoForm = Form(
     tuple(
-      "idtorneo" → of[Long],
-      "idcasa" → of[Long],
-      "scorecasa" → number(min = 0),
-      "idvisitante" → of[Long],
+      "id"             → of[Long],
+      "idtorneo"       → of[Long],
+      "idcasa"         → of[Long],
+      "scorecasa"      → number(min = 0),
+      "idvisitante"    → of[Long],
       "scorevisitante" → number(min = 0),
-      "fecha" → jodaDate("yyyy-MM-dd HH:mm")
+      "fecha"          → jodaDate("yyyy-MM-dd HH:mm")
     )
   )
 
@@ -144,7 +145,7 @@ class TorneoController @javax.inject.Inject() (
       hasErrors ⇒ torneoDao.equiposTorneo(idtorneo).map(es ⇒
         BadRequest(views.html.torneo.registrarPartido(idtorneo, es, hasErrors))),
       success ⇒ {
-        val (idtorneo, idcasa, scorecasa, idvisitante, scorevisitante, fecha) = success
+        val (idpartido, idtorneo, idcasa, scorecasa, idvisitante, scorevisitante, fecha) = success
         val p = Partido.tupled(success)
         torneoDao.agregarPartido(p).map { worked ⇒
           val flash = if (worked) "success" → messagesApi("torneoController.agregarPartido.exito")

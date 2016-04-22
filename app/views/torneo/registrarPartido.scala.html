@@ -1,7 +1,7 @@
 @* registrarPartido Template File *@
 @(idtorneo: Long,
   equiposTorneo: Seq[Equipo],
-  formPartido: Form[(Long, Long, Int, Long, Int, org.joda.time.DateTime)])(implicit messages: Messages, flash: Flash)
+  formPartido: Form[(Long, Long, Long, Int, Long, Int, org.joda.time.DateTime)])(implicit messages: Messages, flash: Flash)
 
 @layout.bootstrap(messages("registrarPartido.title"),
   scripts=Seq(routes.Assets.versioned("lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js").url),
@@ -15,7 +15,7 @@
     }
   </div>
 
-  <div class="container">
+  <input class="container">
 	  @helper.form(action = routes.TorneoController.registrarAction(idtorneo)) {
 	    @defining(equiposTorneo.map(e => (e.id.toString, e.nombre))) { es =>
 	    
@@ -37,6 +37,8 @@
 		  	<input type="hidden" name="idtorneo" value="@idtorneo"></input>
 		                
 		  	<input type="submit" class="btn btn-default" value="@messages("registrarPartido.submit.text")"></input>
+
+	  		<input type="hidden" name="idpartido" value="@formPartido("idpartido").value.getOrElse(-1L)"></input>
 	  	}
 	  }
   </div>

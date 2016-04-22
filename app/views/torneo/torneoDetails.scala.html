@@ -1,5 +1,5 @@
 @* torneoDetails Template File *@
-@(t: Torneo, es: Seq[Equipo], ps: Seq[Partido])(implicit flash: Flash, messages: Messages)
+@(t: Torneo, es: Seq[Equipo], ps: Seq[(Partido, Equipo, Equipo)])(implicit flash: Flash, messages: Messages)
 
 @layout.bootstrap(messages("torneoDetails.tituloVentana"),
   scripts = Seq(routes.Assets.versioned("javascripts/crearTorneo.js").url)
@@ -93,15 +93,21 @@
 	      <table class="table">
 	        <thead>
 	          <tr>
-	            <td>Id Casa</td>
+	            <td>Casa</td>
+				<td></td>
+			    <td>-</td>
+				<td></td>
 	            <td>Id Visitante</td>
 	        </thead>
 	        
 	        <tbody>
-	          @for(p <- ps) {
+	          @for((p, ecasa, evisitante) <- ps) {
 	            <tr>
-	              <td>@p.idcasa</td>
-	              <td>@p.idvisitante</td>
+	              <td>@ecasa.nombre</td>
+				  <td>@p.scoreCasa</td>
+				  <td></td>
+				  <td>@p.scoreVisitante</td>
+	              <td>@evisitante.nombre</td>
 	            </tr>
 	          }
 	        </tbody>

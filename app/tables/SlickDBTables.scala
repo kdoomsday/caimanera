@@ -53,7 +53,7 @@ trait SlickDBTables {
     
     def * = (id, idtorneo, idcasa, scoreCasa, idvisitante, scoreVisitante, fecha).shaped <> (
       { case (id, idtorneo, idcasa, scoreCasa, idvisitante, scoreVisitante, fecha) ⇒
-          Partido(idtorneo, idcasa, scoreCasa, idvisitante, scoreVisitante, new DateTime(fecha))
+          Partido(id, idtorneo, idcasa, scoreCasa, idvisitante, scoreVisitante, new DateTime(fecha))
       },
       { p: Partido ⇒ Some((-1L, p.idTorneo, p.idcasa, p.scoreCasa, p.idvisitante, p.scoreVisitante, datetime2Timestamp(p.fecha))) }
     )
