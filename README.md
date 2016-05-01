@@ -1,50 +1,21 @@
-Play Silhouette Postgres Async Seed
-===================================
+Caimanera
+=========
 
-The Play Silhouette Postgres Async Seed project shows how [Silhouette 3.0](https://github.com/mohiva/play-silhouette) can be used
-to create an application with Play 2.4, [postgres-async](https://github.com/mauricio/postgresql-async), and [jdub-async](https://github.com/KyleU/jdub-async), 
-supporting signing in with Facebook, Google, or Twitter. It's a starting point which can be extended to fit your needs.
+Aplicacion de administracion de torneos. Maneja torneos, equipos del torneo y partidos jugados.
 
-## Authentication Behavior
+## Internacionalizacion
 
-All requests from a new source result in a Session and User being created. 
-After signing up, they'll have a credentialed or social profile associated to the User.
-You can associate any number of profiles to a User.
+Se puede cambiar los mensajes en el archivo messages, usando el nombre correcto para el archivo.
+Por ejemplo: messages_es, messages_es, etc.
 
-## Features
+## Administracion de torneos et al
 
-* Sign Up
-* Sign In (Credentials)
-* Social Auth (Facebook, Google+, Twitter)
-* Dynamic Schema Creation
-* Role-based Permissions
-* User Search Service
-* Minimal Dependency Injection with Guice
-* Publishing Events
+Por lo pronto se puede registrar torneos, equipos que participan en el torneo y partidos jugados en
+el torneo, asgurandose que los equipos que juegan un partido en efecto juegan el torneo para el que
+se registra. Se asegura tambien de validaciones simples como que los goles sean positivos, que no
+sea el mismo equipo multiples veces, etc.
 
-## Configuring social providers 
-  
-Social providers need to be configured in the application.conf file. 
-```
-// Facebook
-facebook {
-  clientId = "CHANGEME"
-  clientSecret = "CHANGEME"
-}
-    
-// Google
-google {
-  clientId = "CHANGEME"
-  clientSecret = "CHANGEME"
-}
+## Seguridad
 
-etc...
-```
-  
-## Activator
-
-See https://typesafe.com/activator/template/play-silhouette-postgres-async-seed
-
-# License
-
-The code is licensed under [Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0).
+Aun no hay manejo de permisologia, torneos de diferentes usuarios, etc. Eso esta planificado pero
+no funciona aun.
