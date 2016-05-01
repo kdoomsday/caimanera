@@ -9,13 +9,19 @@
 ) {
   
   
-  <div class="container">
-    @layout.pageTitle {
-      <h1>@messages("registrarPartido.title")</h1>
-    }
-  </div>
+    <div class="container">
+      @layout.pageTitle {
+        <h1>@messages("registrarPartido.title")</h1>
+      }
+    </div>
 
-  <input class="container">
+    @if(formPartido.hasGlobalErrors) {
+        @for(FormError(_, mensaje, _) <- formPartido.globalErrors) {
+            @util.notificar(mensaje.head, layouts.NotifyWarning)
+        }
+    }
+
+  <div class="container">
 	  @helper.form(action = routes.TorneoController.registrarAction(idtorneo)) {
 	    @defining(equiposTorneo.map(e => (e.id.toString, e.nombre))) { es =>
 	    

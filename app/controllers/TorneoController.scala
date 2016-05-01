@@ -2,27 +2,24 @@ package controllers
 
 import services.user.AuthenticationEnvironment
 import play.api.i18n.MessagesApi
-import play.api.db.slick.HasDatabaseConfig
-import slick.driver.JdbcProfile
-import play.api.db.slick.DatabaseConfigProvider
-import play.api.Play
 import dao.slick.TorneoDaoSlick
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
-import models.{ Torneo, Equipo, Partido }
+import models.{ Equipo, Partido }
 import java.util.UUID
 import scala.concurrent.Future
 import models.Torneo
+import javax.inject.{ Singleton, Inject }
 
 object TorneoController {
   case class TorneoDef(id: Long, nombre: String, idcreador: UUID, equipos: List[String])
 }
 
-@javax.inject.Singleton
-class TorneoController @javax.inject.Inject() (
+@Singleton
+class TorneoController @Inject() (
     override val messagesApi: MessagesApi,
-    override val env: AuthenticationEnvironment)
+    override val env: AuthenticationEnvironment )
     extends BaseController
 {
   import TorneoController.TorneoDef
@@ -125,14 +122,16 @@ class TorneoController @javax.inject.Inject() (
 
   val partidoForm = Form(
     tuple(
-      "id"             → of[Long],
+      "idpartido"      → of[Long],
       "idtorneo"       → of[Long],
       "idcasa"         → of[Long],
       "scorecasa"      → number(min = 0),
       "idvisitante"    → of[Long],
       "scorevisitante" → number(min = 0),
       "fecha"          → jodaDate("yyyy-MM-dd HH:mm")
-    )
+    ) verifying(messagesApi("partidoform.equiposDistintos"), fields ⇒ fields match {
+      case (_, _, idcasa, _, idvisitante, _, _) => idcasa != idvisitante
+    })
   )
 
   
